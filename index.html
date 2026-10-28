@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="精選全台好評市集與展會的攤主招募，中英雙語，直接連到主辦方報名表。Stall calls from Taiwan's well-loved markets, in English and Chinese.">
+<meta property="og:title" content="市集總匯 Taiwan Market Hub">
+<meta property="og:description" content="全台市集攤主招募，一次看完。Taiwan market stall calls in one place.">
+<meta name="theme-color" content="#7E57C2">
+<link rel="icon" href="icon.png">
+<style>body{margin:0}</style>
+</head><body>
+<title>市集總匯 Pixel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* Layout: canopy-striped header, tab bar, stall "tickets" in a single column; calendar as a 7-col grid. */
+:root{
+  --bg:#F5F6F1; --surface:#FFFFFF; --fg:#1B2420; --muted:#5D6862; --line:#DDE1D8;
+  --accent:#2346A0; --accent-ink:#FFFFFF; --tag:#F4C542; --tag-ink:#3A2E05; --canopy:#C8412F; --heart:#C8412F;
+  --ok:#1F7A4A; --ok-bg:#E2F2E8; --warn:#A25A00; --warn-bg:#FCEBD2; --off:#6B6F6C; --off-bg:#ECEDEA; --info:#2346A0; --info-bg:#E4EAF8;
+  --f-display:"Huninn","Noto Sans TC",system-ui,sans-serif;
+  --f-body:"Noto Sans TC",system-ui,-apple-system,"PingFang TC",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121715; --surface:#1B221F; --fg:#E7ECE8; --muted:#9AA59F; --line:#2D3833;
+  --accent:#8FA8F0; --accent-ink:#0E1530; --tag:#E2B73A; --tag-ink:#2A2104; --canopy:#E0644F; --heart:#F07A66;
+  --ok:#7FD1A2; --ok-bg:#163326; --warn:#F2B866; --warn-bg:#3A2A12; --off:#A2A8A4; --off-bg:#262C29; --info:#9DB3F2; --info-bg:#1C2440;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715; --surface:#1B221F; --fg:#E7ECE8; --muted:#9AA59F; --line:#2D3833;
+  --accent:#8FA8F0; --accent-ink:#0E1530; --tag:#E2B73A; --tag-ink:#2A2104; --canopy:#E0644F; --heart:#F07A66;
+  --ok:#7FD1A2; --ok-bg:#163326; --warn:#F2B866; --warn-bg:#3A2A12; --off:#A2A8A4; --off-bg:#262C29; --info:#9DB3F2; --info-bg:#1C2440;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6}
+body[data-lang="zh"] .en, body[data-lang="en"] .zh{display:none!important}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.canopy{height:14px;background:repeating-linear-gradient(90deg,var(--canopy) 0 28px,var(--surface) 28px 56px);border-bottom:1px solid var(--line)}
+header .wrap{padding-block:18px 6px;display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+h1{font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.2;margin:0;letter-spacing:.02em}
+.sub{margin:4px 0 0;color:var(--muted);max-width:58ch;text-wrap:balance}
+.updated{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.lang button{border:0;background:none;color:var(--muted);font:500 13px var(--f-body);padding:6px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tab{border:0;background:none;color:var(--muted);font:500 15px var(--f-body);padding:10px 12px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--canopy)}
+.filters{display:grid;gap:10px;padding-block:12px}
+.search{display:flex;gap:8px}
+.search input{flex:1;min-width:0;font:15px var(--f-body);padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.quick{display:flex;gap:8px;flex-wrap:wrap}
+.selects{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:620px){.selects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.selects label{display:grid;gap:2px;font-size:12px;color:var(--muted);letter-spacing:.04em;min-width:0}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:4px 12px;font:14px var(--f-body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+select{font:14px var(--f-body);padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);width:100%;min-width:0}
+.count{font-size:13px;color:var(--muted);padding-block:4px 8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.linkbtn{border:0;background:none;color:var(--accent);font:13px var(--f-body);cursor:pointer;padding:0}
+main .wrap{padding-block:0 32px}
+.list{display:grid;gap:12px}
+.ticket{display:grid;grid-template-columns:84px 1fr;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.when{background:var(--tag);color:var(--tag-ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 6px;text-align:center;border-right:2px dashed color-mix(in srgb,var(--tag-ink) 30%,transparent);font-family:var(--f-mono)}
+.when .m{font-size:12px;letter-spacing:.08em}
+.when .d{font-size:26px;line-height:1.1;font-family:var(--f-display)}
+.when .to{font-size:11px;margin-top:4px}
+#view-expos .when .m{line-height:1.3}
+.body{padding:14px 16px;min-width:0;display:grid;gap:6px}
+.top{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.name{font-weight:700;font-size:17px;line-height:1.35;margin:0;text-wrap:balance;min-width:0}
+.org{font-size:13px;color:var(--muted)}
+.fav{border:0;background:none;cursor:pointer;font-size:22px;line-height:1;color:var(--muted);padding:2px 4px;flex:none}
+.fav[aria-pressed="true"]{color:var(--heart)}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:500;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.s-open{background:var(--ok-bg);color:var(--ok)} .s-tbd{background:var(--info-bg);color:var(--info)}
+.s-closing{background:var(--warn-bg);color:var(--warn)} .s-closed,.s-upcoming{background:var(--off-bg);color:var(--off)}
+.s-pick{background:var(--tag);color:var(--tag-ink)}
+.s-gov{background:var(--ok-bg);color:var(--ok)}
+.meta{color:var(--muted);font-size:14px;display:grid;gap:2px}
+.meta b{color:var(--fg);font-weight:500}
+.types{display:flex;gap:6px;flex-wrap:wrap}
+.type{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:0 6px;color:var(--muted)}
+.note{font-size:13px;color:var(--warn)}
+.opens{font-size:15px;color:var(--fg);background:var(--info-bg);border-radius:8px;padding:6px 10px}
+.opens b{color:var(--info)}
+.dlsmall{font-size:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;border-radius:8px;padding:8px 14px;font:500 14px var(--f-body);cursor:pointer;text-decoration:none;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:none;color:var(--accent)}
+.btn.small{padding:4px 10px;font-size:13px}
+.btn:focus-visible,.chip:focus-visible,select:focus-visible,.lang button:focus-visible,input:focus-visible,.tab:focus-visible,.fav:focus-visible,.day:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.src{font-size:12px;color:var(--muted)} .src a{color:var(--muted)}
+.remind{border-top:1px dashed var(--line);margin-top:6px;padding-top:10px;display:grid;gap:10px}
+.remind .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.remind input[type=number]{width:4.5em;font:14px var(--f-mono);padding:5px 6px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+.remind select{width:auto}
+.result{font-size:14px} .result.bad{color:var(--warn)}
+.hint{font-size:12px;color:var(--muted)}
+.empty{padding:32px 0;color:var(--muted);text-align:center}
+/* calendar */
+.calhead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:12px 8px}
+.calhead h2{font-family:var(--f-display);font-weight:400;font-size:22px;margin:0}
+.legend{display:flex;gap:12px;font-size:12px;color:var(--muted);flex-wrap:wrap;padding-bottom:8px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.dot.mk{background:var(--accent)} .dot.dl{background:var(--canopy)}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wd{font-size:12px;color:var(--muted);text-align:center;padding-bottom:2px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:8px;min-height:62px;padding:4px 6px;text-align:left;font:13px var(--f-mono);color:var(--fg);cursor:pointer;display:flex;flex-direction:column;gap:2px;min-width:0}
+.day.blank{background:none;border:0;cursor:default}
+.day.today{border-color:var(--fg)}
+.day[aria-pressed="true"]{outline:2px solid var(--accent)}
+.day .n{font-size:12px;color:var(--muted)}
+.day .c{font-size:12px;font-family:var(--f-body);display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.daylist{padding-top:14px}
+.daylist h3{font-size:15px;margin:0 0 8px}
+/* organizers + guide */
+.orgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-top:12px}
+@media (max-width:620px){.orgs{grid-template-columns:1fr}}
+.ogh{grid-column:1/-1;font-family:var(--f-display);font-weight:400;font-size:20px;margin:12px 0 0}
+.ocard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.ocard h3{margin:0;font-size:16px}
+.ocard .h{font:12px var(--f-mono);color:var(--muted)}
+.ocard p{margin:0;font-size:14px;color:var(--muted)}
+.ocard .open{font-size:13px;color:var(--ok)}
+.guide{max-width:68ch;padding-top:8px}
+.guide h2{font-family:var(--f-display);font-weight:400;font-size:22px;margin:24px 0 8px}
+.guide h3{font-size:16px;margin:16px 0 6px}
+.guide p,.guide li{font-size:15px}
+.guide ul{padding-left:1.2em;margin:6px 0}
+.helpbox{margin-block:24px 8px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);display:grid;gap:8px;justify-items:start}
+.helpbox h3{margin:0;font-size:17px}
+.helpbox p{margin:0;font-size:14px}
+.callout{background:var(--warn-bg);color:var(--fg);border-radius:10px;padding:12px 14px;font-size:14px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-weight:500;color:var(--muted);font-size:12px;letter-spacing:.04em}
+td.k{white-space:nowrap;font-weight:500}
+.lvl{display:inline-block;font-size:13px;font-weight:500;padding:2px 8px;border-radius:8px;line-height:1.45}
+.guide td:first-child{width:46%}
+.guide a,footer a{color:var(--accent)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-block:16px 28px;display:grid;gap:6px}
+@media (max-width:480px){.ticket{grid-template-columns:66px 1fr}.when .d{font-size:22px}h1{font-size:26px}.day{min-height:52px;padding:3px 4px}}
+@media (prefers-reduced-motion:no-preference){.remind{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(-2px)}}}
+</style>
+<style>
+/* Pixel theme: saturated flat screen color, white panels with 3px ink outline and hard shadow, yellow 3D square buttons. Headings/labels in a pixel face; all market info stays in a plain readable face. Single deliberate look. */
+html:root:root:root{
+  --bg:#7E57C2; --surface:#FFFFFF; --fg:#141414; --muted:#4E4A57; --line:#141414;
+  --accent:#141414; --accent-ink:#141414; --tag:#FFC814; --tag-ink:#141414; --canopy:#F44336; --heart:#F44336;
+  --ok:#141414; --ok-bg:#9BE38F; --warn:#B23A00; --warn-bg:#FFD3B8; --off:#141414; --off-bg:#D9D9D9; --info:#141414; --info-bg:#BFE3FF;
+  --yellow:#FFC814; --yellow-d:#C99700; --px-blue:#2196F3; --px-pink:#EC407A; --px-green:#66BB6A;
+  --f-display:"DotGothic16","Noto Sans TC",monospace; --f-pixel:"DotGothic16","Noto Sans TC",monospace; --f-num:"Press Start 2P","DotGothic16",monospace;
+  --f-body:"Noto Sans TC",system-ui,-apple-system,"PingFang TC",sans-serif; --f-mono:"Press Start 2P",monospace;
+  color-scheme:light;
+}
+body{background:var(--bg)}
+.canopy{height:16px;background:repeating-linear-gradient(90deg,#F44336 0 24px,#fff 24px 48px);border-bottom:3px solid #141414;image-rendering:pixelated}
+header h1{font-family:var(--f-pixel);font-size:30px;color:#fff;text-shadow:3px 3px 0 #141414;letter-spacing:.04em}
+header .sub,header .updated{color:#fff}
+.lang{border:3px solid #141414;border-radius:0;box-shadow:4px 4px 0 #141414}
+.lang button{font-family:var(--f-pixel)}
+.lang button[aria-pressed="true"]{background:var(--yellow);color:#141414}
+nav.tabs{background:var(--bg);border-bottom:3px solid #141414}
+body::before{background:var(--bg)}
+.tab{font-family:var(--f-pixel);color:#fff;border-bottom:0;margin-block:6px;padding:6px 10px}
+.tab[aria-selected="true"]{background:var(--yellow);color:#141414;border:3px solid #141414;box-shadow:3px 3px 0 #141414}
+.search input,select{border:3px solid #141414;border-radius:0;font-family:var(--f-body)}
+.selects label,.count,#view-expos>.sub,#view-organizers>.sub{color:#fff}
+.linkbtn{color:var(--yellow);font-family:var(--f-pixel)}
+.chip{border:3px solid #141414;border-radius:0;font-family:var(--f-pixel);background:#fff;box-shadow:3px 3px 0 #141414}
+.chip[aria-pressed="true"]{background:var(--yellow);color:#141414;border-color:#141414}
+.ticket,.ocard,.helpbox,.tablewrap,.callout,.day:not(.blank){border:3px solid #141414!important;border-radius:0!important;box-shadow:6px 6px 0 rgba(0,0,0,.3)}
+.when{background:var(--yellow);border-right:3px solid #141414;font-family:var(--f-num)}
+.when .m{font-size:9px} .when .d{font-family:var(--f-num);font-size:20px} .when .to{font-size:8px}
+.name{font-family:var(--f-body)}
+.pill{border:2px solid #141414;border-radius:0;font-family:var(--f-pixel)}
+.s-pick{background:var(--yellow)}
+.s-gov{background:#9BE38F;color:#141414}
+.opens{background:#BFE3FF;border:2px solid #141414;border-radius:0}
+.opens b{color:#141414}
+.type{border:2px solid #141414;border-radius:0;color:#141414;font-family:var(--f-pixel)}
+.btn{border:3px solid #141414;border-radius:0;font-family:var(--f-pixel);font-size:15px;box-shadow:4px 4px 0 #141414}
+.btn.primary{background:var(--yellow);color:#141414;box-shadow:4px 4px 0 var(--yellow-d),4px 4px 0 3px #141414}
+.btn.ghost{background:#fff;color:#141414}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 #141414}
+.fav{color:#141414}
+.ogh,.guide h2,.calhead h2,.daylist h3{font-family:var(--f-pixel);color:#fff;text-shadow:2px 2px 0 #141414}
+.guide p,.guide li,.guide{color:#fff}
+.guide a{color:var(--yellow)}
+.guide .callout,.guide .helpbox,.guide .tablewrap{color:#141414}
+.guide .helpbox p{color:#141414}
+.wd,.legend{color:#fff}
+.day[aria-pressed="true"]{outline:3px solid var(--yellow)}
+footer{border-top:3px solid #141414;color:#fff}
+footer a{color:var(--yellow)}
+footer .updated{color:var(--yellow);font-family:var(--f-num);font-size:10px}
+.calhead .btn{min-width:44px}
+/* progress tab */
+.pxwrap{display:grid;gap:14px;padding-top:14px}
+.pxlv{display:flex;gap:10px;align-items:center;color:#fff;font-family:var(--f-pixel)}
+.xpbar{flex:1;height:20px;border:3px solid #141414;background:#fff;position:relative}
+.xpbar i{position:absolute;inset:0 auto 0 0;background:var(--yellow);border-right:3px solid #141414}
+.xpbar span{position:absolute;right:6px;top:0;font:9px/14px var(--f-num)}
+.pxstage{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+#pet{width:120px;height:120px;image-rendering:pixelated;filter:drop-shadow(5px 5px 0 rgba(0,0,0,.25))}
+.bubble{background:#fff;border:3px solid #141414;padding:10px 12px;font-family:var(--f-pixel);font-size:15px;white-space:pre-line}
+.qpanel{background:#fff;border:3px solid #141414;box-shadow:6px 6px 0 rgba(0,0,0,.3);padding:12px 14px;display:grid;gap:9px}
+.qhead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.qname{font-size:16px;font-weight:700;margin:0;min-width:0}
+.qtag{font-family:var(--f-pixel);font-size:12px;border:2px solid #141414;padding:0 6px;background:var(--yellow);white-space:nowrap}
+.meters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.meter{display:grid;gap:3px;font-size:12px;font-family:var(--f-pixel)}
+.mbar{height:20px;border:3px solid #141414;position:relative;background:#fff}
+.mbar i{position:absolute;inset:0 auto 0 0}
+.mbar b{position:absolute;left:6px;top:0;font:9px/14px var(--f-num)}
+.steps{display:flex;gap:4px;flex-wrap:wrap}
+.step{font-family:var(--f-pixel);font-size:12px;border:2px solid #141414;padding:1px 6px;background:#D9D9D9}
+.step.done{background:var(--px-green)} .step.now{background:var(--yellow)}
+.pxempty{background:#fff;border:3px solid #141414;padding:16px;font-family:var(--f-pixel)}
+.pxtoast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#141414;color:var(--yellow);font:11px var(--f-num);padding:10px 14px;border:3px solid #fff;z-index:20}
+.remind input[type=number]{background:#fff;border:3px solid #141414;border-radius:0}
+.cardhit{all:unset;cursor:pointer;min-width:0;display:block}
+.cardhit:focus-visible{outline:3px dashed #141414;outline-offset:3px}
+.ticket.mini .body{gap:6px;padding:10px 12px}
+.ticket.mini .when{padding:8px 4px}
+.opens.compact{font-size:14px;padding:3px 8px}
+.orow{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.orow .opens{flex:1;min-width:10em}
+.chev{font-size:16px;padding:0 4px}
+.ticket.mini{cursor:pointer}
+.ticket.mini .org{margin-bottom:2px}
+.morebtn{justify-self:start;background:none;border:0;padding:2px 0;font-family:var(--f-pixel);font-size:14px;color:#141414;text-decoration:underline;cursor:pointer}
+.morebtn:focus-visible{outline:3px dashed #141414;outline-offset:2px}
+.list{gap:10px}
+.fair{margin-top:12px;border:3px solid #141414;background:linear-gradient(to top,#9BE38F 0 5px,#DDEFFF 5px);box-shadow:5px 5px 0 rgba(0,0,0,.3);display:flex;align-items:center;justify-content:space-between;gap:8px;padding-left:12px;height:64px;overflow:hidden}
+.fairtxt{font-family:var(--f-pixel);font-size:14px;line-height:1.35;color:#141414;min-width:0}
+.fairtxt b{font-family:var(--f-num);font-size:13px;color:#EC407A}
+.fair canvas{display:block;height:58px;width:auto;image-rendering:pixelated;flex:none;align-self:flex-end;margin-right:10px}
+.hw{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+header,nav.tabs,main,footer{position:relative;z-index:1}
+nav.tabs{z-index:5}
+.hw svg{shape-rendering:crispEdges;display:block}.hw>svg{position:absolute}
+.hw .fall,.hw .rise{opacity:.6}
+.hw .web{width:150px;height:150px;opacity:.4}
+@media (max-width:600px){.hw .web{width:110px;height:110px;opacity:.3}}
+.hw .spider{animation:dangle 3.2s ease-in-out infinite alternate}
+@keyframes dangle{to{transform:translateY(28px)}}
+.hw .bat{animation:flap .5s steps(2) infinite}
+@keyframes flap{50%{transform:scaleY(.6)}}
+.hw .batpath{position:absolute;animation:fly 18s linear infinite}
+@keyframes fly{from{transform:translateX(-60px)}to{transform:translateX(calc(100vw + 60px))}}
+.hwhead{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:-6px;display:flex;gap:4px;align-items:flex-end;pointer-events:none}
+header .wrap{position:relative}
+@media (prefers-reduced-motion:reduce){.hw .spider,.hw .bat,.hw .batpath{animation:none}}
+.hw .fall,.hw .rise,.hw .twinkle{position:absolute}
+.hw .fall{animation:fall linear infinite}
+@keyframes fall{from{transform:translateY(0)}to{transform:translateY(calc(100vh + 80px))}}
+.hw .rise{animation:rise linear infinite;opacity:.85}
+@keyframes rise{from{transform:translateY(0)}to{transform:translateY(calc(-100vh - 100px))}}
+.hw .twinkle{animation:tw 2.4s steps(2) infinite}
+@keyframes tw{50%{opacity:.25}}
+.hw .blink{animation:boom 2.2s steps(4) infinite}
+@keyframes boom{0%{transform:scale(.3);opacity:0}30%{transform:scale(1);opacity:1}80%{opacity:1}100%{transform:scale(1.15);opacity:0}}
+@media (max-width:600px){.hw .fall:nth-child(n+11),.hw .rise:nth-child(n+8),.hw .twinkle:nth-child(n+9){display:none}}
+@media (prefers-reduced-motion:reduce){.hw .twinkle,.hw .blink{animation:none}.hw .fall,.hw .rise{display:none}}
+.helpstrip{display:block;margin-top:10px;background:#BFE3FF;border:3px solid #141414;box-shadow:4px 4px 0 rgba(0,0,0,.3);padding:8px 12px;color:#141414;text-decoration:none;font-size:14px;line-height:1.45}
+.helpstrip b{font-family:var(--f-pixel);font-weight:400;margin-right:4px}
+.applynote{font-size:13px;color:#4E4A57}
+.formhelp{justify-self:start;white-space:nowrap;font-family:var(--f-pixel);font-size:14px;color:#141414;background:#BFE3FF;border:2px solid #141414;padding:2px 8px;text-decoration:none}
+.newtag{display:inline-block;font:9px/1 var(--f-num);background:#EC407A;color:#fff;border:2px solid #141414;padding:3px 4px;margin-right:6px;vertical-align:2px}
+footer .fb{justify-self:start;background:var(--yellow)}
+.rbuddy{display:flex;align-items:center;gap:8px}
+.rbuddy canvas{width:56px;height:56px;image-rendering:pixelated;flex:none;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.25))}
+.rsay{background:#fff;border:3px solid #141414;box-shadow:3px 3px 0 #141414;padding:6px 10px;font-family:var(--f-pixel);font-size:14px;position:relative;min-width:0}
+.rsay.bump{animation:bump .4s steps(3)}
+@keyframes bump{50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.rsay.bump{animation:none}}
+.buddy{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:flex-end;gap:6px;z-index:30;pointer-events:none}
+.buddy canvas{width:72px;height:72px;image-rendering:pixelated;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.3))}
+.buddy .say{background:#fff;border:3px solid #141414;box-shadow:4px 4px 0 #141414;padding:6px 10px;font-family:var(--f-pixel);font-size:15px;margin-bottom:34px;white-space:nowrap}
+.buddy.show{animation:pop .5s steps(4) both}
+.buddy.hide{animation:drop .35s steps(3) both}
+@keyframes pop{from{transform:translateY(120%)}to{transform:none}}
+@keyframes drop{to{transform:translateY(140%)}}
+@media (prefers-reduced-motion:reduce){.buddy.show,.buddy.hide{animation:none}}
+</style>
+
+
+<div class="canopy" aria-hidden="true"></div>
+<header><div class="wrap">
+  <div>
+    <h1><span class="zh">市集總匯</span><span class="en">Taiwan Market Hub</span></h1>
+    <p class="sub"><span class="zh">精選全台好評市集的攤主招募。找到想擺的場，直接連到主辦方的報名表單，也能設定提醒加進手機行事曆。</span><span class="en">Stall calls from Taiwan's well-loved markets. Find one, go straight to the organizer's form, and set a reminder in your phone calendar.</span></p>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button id="lang-zh" type="button">中文</button>
+    <button id="lang-en" type="button">EN</button>
+  </div>
+</div></header>
+
+<nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
+  <button class="tab" role="tab" id="tab-list" data-view="list"><span class="zh">招募中</span><span class="en">Stall calls</span></button>
+  <button class="tab" role="tab" id="tab-progress" data-view="progress"><span class="zh">我的進度</span><span class="en">My stalls</span></button>
+  <button class="tab" role="tab" id="tab-calendar" data-view="calendar"><span class="zh">月曆</span><span class="en">Calendar</span></button>
+  <button class="tab" role="tab" id="tab-expos" data-view="expos"><span class="zh">大型展會</span><span class="en">Expos</span></button>
+  <button class="tab" role="tab" id="tab-organizers" data-view="organizers"><span class="zh">主辦方</span><span class="en">Organizers</span></button>
+  <button class="tab" role="tab" id="tab-guide" data-view="guide"><span class="zh">外國攤主指南</span><span class="en">Guide for foreign vendors</span></button>
+</div></nav>
+
+<main><div class="wrap">
+
+<section id="view-list">
+  <div class="fair"><span class="fairtxt" id="fairtxt"></span><canvas id="fair" width="116" height="44" aria-hidden="true"></canvas></div>
+  <a class="helpstrip en" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener"><b>Form only in Chinese?</b> I'll walk you through it. DM @markethub.tw ↗</a>
+  <div class="filters">
+    <div class="search"><input id="q" type="search" autocomplete="off" aria-label="Search"></div>
+    <div class="quick" id="quick"></div>
+    <div class="selects">
+      <label><span id="l-region"></span><select id="f-region"></select></label>
+      <label><span id="l-cat"></span><select id="f-cat"></select></label>
+      <label><span id="l-status"></span><select id="f-status"></select></label>
+      <label><span id="l-month"></span><select id="f-month"></select></label>
+    </div>
+  </div>
+  <div class="count"><span id="count" aria-live="polite"></span><button type="button" class="linkbtn" id="reset"></button></div>
+  <div class="list" id="list"></div>
+</section>
+
+<section id="view-progress" hidden><div class="pxwrap">
+  <div class="pxlv"><span id="pxlv"></span><div class="xpbar"><i id="pxfill"></i><span id="pxxp"></span></div></div>
+  <div class="pxstage"><canvas id="pet" width="22" height="22" aria-label="小攤吉祥物"></canvas><div class="bubble" id="pxsay" aria-live="polite"></div></div>
+  <div id="pxlist" style="display:grid;gap:16px"></div>
+</div></section>
+
+<section id="view-calendar" hidden>
+  <div class="calhead">
+    <button type="button" class="btn ghost small" id="cal-prev" aria-label="Previous month">‹</button>
+    <h2 id="cal-title"></h2>
+    <button type="button" class="btn ghost small" id="cal-next" aria-label="Next month">›</button>
+  </div>
+  <div class="legend"><span><i class="dot mk"></i><span class="zh">市集舉辦</span><span class="en">Market day</span></span><span><i class="dot dl"></i><span class="zh">報名截止／開放</span><span class="en">Deadline / opens</span></span><span id="cal-favnote"></span></div>
+  <div class="grid" id="cal-grid"></div>
+  <div class="daylist" id="daylist"></div>
+</section>
+
+<section id="view-expos" hidden>
+  <p class="sub" style="padding-top:12px"><span class="zh">文博會、禮品文具展、動漫祭、食品展這類大型展會，通常要提早半年到一年報名，攤位費也比市集高很多。這裡整理適合小品牌的展會、通常的報名時間，以及海外品牌能不能報名。報名條件以各主辦方官網為準。</span><span class="en">Large expos like Creative Expo Taiwan, gift and stationery shows, comic fairs and food shows usually take applications 6–12 months ahead and cost far more than a market stall. Here are the ones that suit small brands, their usual timing, and whether overseas brands can apply. Requirements are set by each organizer; confirm on their site.</span></p>
+  <a class="helpstrip en" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener"><b>Form only in Chinese?</b> I'll walk you through it. DM @markethub.tw ↗</a>
+  <div class="quick" id="expo-filter" style="padding-block:10px"></div>
+  <div class="list" id="expo-list"></div>
+  <div class="helpbox">
+    <h3><span class="en">Need help with a Chinese application form?</span><span class="zh">看不懂中文報名表？</span></h3>
+    <p><span class="en">I can walk you through the form and explain each field and the payment steps. You submit and pay yourself.</span><span class="zh">我可以陪你一起看表單，說明每個欄位和繳費步驟；送出和付款都由你自己操作。</span></p>
+    <a class="btn primary" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener"><span class="en">Message me on Instagram</span><span class="zh">用 IG 私訊我</span> ↗</a>
+    <p class="hint"><span class="en">@markethub.tw · Help with understanding and filling in forms only. Acceptance isn't guaranteed; eligibility is set by each organizer.</span><span class="zh">@markethub.tw・本服務僅協助理解與填寫，不保證錄取，報名資格請以主辦方規定為準。</span></p>
+  </div>
+</section>
+
+<section id="view-organizers" hidden>
+  <p class="sub" style="padding-top:12px"><span class="zh">這些主辦方口碑好、常常一開就額滿。目前沒有開放招募的，先追蹤他們的官方管道，公告一出就能搶先報名。</span><span class="en">Well-regarded organizers whose spots fill fast. If nothing is open right now, follow their official channels so you see the next call first.</span></p>
+  <div class="orgs" id="orgs"></div>
+</section>
+
+<section id="view-guide" hidden><div class="guide">
+  <div class="callout" style="margin-top:14px"><span class="zh">這頁只整理資訊和官方查詢入口。每場市集、展會的報名條件，以主辦方公告為準；身分、稅務等規定，以政府單位公告為準。有疑問請直接向主辦方或下列單位確認。</span><span class="en">This page only collects information and links to official sources. Each market's or expo's requirements are set by its organizer, and residence or tax rules by the government. If in doubt, ask the organizer or the agencies below directly.</span></div>
+
+  <h2><span class="zh">1. 身分與工作許可</span><span class="en">1. Residence status and work permits</span></h2>
+  <p><span class="zh">外國人能不能在台灣擺攤，要看個人的居留身分。請到以下官方網站查詢，或直接詢問。</span><span class="en">Whether a foreigner may run a stall depends on their residence status. Check these official sites or ask them directly.</span></p>
+  <ul>
+    <li><a href="https://contacttaiwan.tw/MainOne/FAQ.aspx?faq=18" target="_blank" rel="noopener"><span class="zh">Contact Taiwan 延攬人才辦公室：常見問題</span><span class="en">Contact Taiwan: FAQ</span></a></li>
+    <li><a href="https://ezworktaiwan.wda.gov.tw/en/cp.aspx?n=8CE17C2739F9AB35&amp;s=9BEFF2CF37C2786B" target="_blank" rel="noopener"><span class="zh">勞動部勞動力發展署 EZ Work Taiwan</span><span class="en">Workforce Development Agency: EZ Work Taiwan</span></a></li>
+    <li><a href="https://goldcard.nat.gov.tw/en/faq/can-i-be-self-employed" target="_blank" rel="noopener"><span class="zh">就業金卡常見問題</span><span class="en">Taiwan Gold Card FAQ</span></a></li>
+    <li><a href="https://www.boca.gov.tw/cp-149-4486-7785a-2.html" target="_blank" rel="noopener"><span class="zh">外交部領事事務局：免簽入境</span><span class="en">Bureau of Consular Affairs: visa-free entry</span></a></li>
+  </ul>
+
+  <h2><span class="zh">2. 登記與稅務</span><span class="en">2. Registration and tax</span></h2>
+  <p><span class="zh">要不要辦登記、繳稅，請以財政部和所在地國稅局的說明為準；賣食品的另外看食藥署的規定。</span><span class="en">For registration and tax, follow the Ministry of Finance and your local National Taxation Bureau. Food sellers should also check the Food and Drug Administration.</span></p>
+  <ul>
+    <li><a href="https://www.etax.nat.gov.tw/" target="_blank" rel="noopener"><span class="zh">財政部稅務入口網</span><span class="en">Ministry of Finance e-Tax portal</span></a></li>
+    <li><a href="https://laws.gov.taipei/Law/LawSearch/LawArticleContent/FL011295" target="_blank" rel="noopener"><span class="zh">商業登記法第 5 條</span><span class="en">Commercial Registration Act, Art. 5</span></a></li>
+    <li><a href="https://www.fda.gov.tw/Tc/newsContent.aspx?cid=4&amp;id=13667" target="_blank" rel="noopener"><span class="zh">食藥署：食品業者登錄</span><span class="en">FDA: food business registration</span></a></li>
+  </ul>
+
+  <h2><span class="zh">3. 報名表常見用語</span><span class="en">3. Words you'll see on application forms</span></h2>
+  <div class="tablewrap"><table id="gloss"><tbody></tbody></table></div>
+
+  <h2><span class="zh">4. 繳費小提醒</span><span class="en">4. Paying the booth fee</span></h2>
+  <ul>
+    <li><span class="zh">大多數主辦方用台灣的銀行轉帳收費；可以用什麼方式付款，以各主辦方的說明為準。</span><span class="en">Most organizers take a Taiwan bank transfer; check each organizer's payment instructions.</span></li>
+    <li><span class="zh">「後五碼」通常是指<b>你轉出那個帳戶</b>的最後五碼。轉帳後記得截圖留存。</span><span class="en">"後五碼" usually means the last 5 digits of <b>the account you paid from</b>. Screenshot your receipt.</span></li>
+    <li><span class="zh">付款前先看主辦方的「退費規定」。</span><span class="en">Read the organizer's refund policy before you pay.</span></li>
+    <li><span class="zh">報名前先看看主辦方 IG／FB 過去辦過的活動，避免遇到假的市集。可疑的話可以打 165 反詐騙專線。</span><span class="en">Check the organizer's past events on IG/FB before applying to avoid fake markets. Taiwan's anti-fraud hotline is 165.</span></li>
+  </ul>
+
+  <h2><span class="zh">5. 海外品牌參展</span><span class="en">5. Overseas brands at expos</span></h2>
+  <p><span class="zh">各展會海外品牌的報名方式不同，請看「大型展會」分頁每張卡片的說明，再點進主辦方官網確認。</span><span class="en">Each expo handles overseas applicants differently. See the notes on each card in the Expos tab, then confirm on the organizer's site.</span></p>
+  <div class="helpbox">
+    <h3><span class="en">Need help with a Chinese application form?</span><span class="zh">看不懂中文報名表？</span></h3>
+    <p><span class="en">I can walk you through the form and explain each field and the payment steps. You submit and pay yourself.</span><span class="zh">我可以陪你一起看表單，說明每個欄位和繳費步驟；送出和付款都由你自己操作。</span></p>
+    <a class="btn primary" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener"><span class="en">Message me on Instagram</span><span class="zh">用 IG 私訊我</span> ↗</a>
+    <p class="hint"><span class="en">@markethub.tw · Help with understanding and filling in forms only. Acceptance isn't guaranteed; eligibility is set by each organizer.</span><span class="zh">@markethub.tw・本服務僅協助理解與填寫，不保證錄取，報名資格請以主辦方規定為準。</span></p>
+  </div>
+</div></section>
+
+</div></main>
+
+<footer><div class="wrap" id="foot"></div></footer>
+
+<script>
+let UPDATED = "2026-10-28";
+/* Remote data: edit GH_USER after the GitHub repo exists. Website on GitHub Pages reads ./data.json; the app reads the same file over HTTPS. Falls back to the data below if offline. */
+const GH_USER = "USERNAME", GH_REPO = "markethub";
+const S17 = "https://17847market.com.tw/monthly-vendor-202611/";
+const GDS = id => "https://gds.apothecary1969.com/web/activity/activity_in.jsp?cp_id=" + id;
+const GD_ORG = {zh:"好日市集",en:"Good Days Market (Taipei)"};
+const CRAFTSMAN = {zh:"職原市職人創意市集",en:"Original Craftsman Market"};
+
+/* region: north|central|south|east ; cats: handmade design food drink apparel accessories kids pets plants secondhand farm art */
+const MARKETS = [
+ {id:"gd-songshan-nichizo",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-11-21",end:"2026-11-22",deadline:null,fee:1400,cats:["handmade","design","art","accessories"],mrt:true,pick:true,juried:true,
+  zh:{name:"日常。日藏選物市",city:"台北市・信義區",venue:"松山文創園區 南向製菸工廠",sched:"週六日 13:00–19:00",fee:"兩日：1/4 格 2,800 元起，全格 7,200 元；押金 500 元",note:"不收批貨、量產、淘寶商品"},
+  en:{name:"Daily Treasures Select Market",city:"Xinyi, Taipei",venue:"Songshan Cultural Park, South Tobacco Factory",sched:"Sat–Sun 13:00–19:00",fee:"2 days: from NT$2,800 (quarter) to NT$7,200 (full); NT$500 deposit",note:"No wholesale, mass-produced or Taobao goods."},
+  apply:GDS("CP1776520029499"),source:GDS("CP1776520029499")},
+ {id:"gd-songshan-xmas",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-12-19",end:"2026-12-20",deadline:null,fee:1500,cats:["design","handmade","accessories","apparel","food"],mrt:true,pick:true,juried:true,
+  zh:{name:"聖誕節的形狀",city:"台北市・信義區",venue:"松山文創園區 文創大街",sched:"週六日 13:00–19:00（兩日不拆）",fee:"兩日：半棚 3,000 元起；押金 500 元",note:"飾品類名額很少；用電上限 300W"},
+  en:{name:"Shape of Christmas",city:"Xinyi, Taipei",venue:"Songshan Cultural Park, Creative Street",sched:"Sat–Sun 13:00–19:00 (both days)",fee:"2 days: from NT$3,000 (half tent); NT$500 deposit",note:"Very few jewelry spots; 300W power cap."},
+  apply:GDS("CP1776511695401"),source:GDS("CP1776511695401")},
+ {id:"gd-expo-xmas",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-12-11",end:"2026-12-13",deadline:null,fee:1650,cats:["design","handmade","food","pets","plants"],mrt:true,pick:true,juried:true,
+  zh:{name:"聖誕頌歌｜花博聖誕市集",city:"台北市・中山區",venue:"花博公園 環型廣場、花海廣場",sched:"五 14:00–19:00；六日 11:00–19:00",fee:"兩日半棚 3,300 元起；餐車 1,600 元；押金 500 元",note:"攤位需要聖誕佈置；禁止明火"},
+  en:{name:"Christmas Carol Market",city:"Zhongshan, Taipei",venue:"Taipei Expo Park, Ring Plaza & Flower Sea Plaza",sched:"Fri 14:00–19:00; Sat–Sun 11:00–19:00",fee:"From NT$3,300 (2-day half tent); food truck NT$1,600; NT$500 deposit",note:"Booths must be Christmas-themed; no open flames."},
+  apply:GDS("CP1779247079345"),source:GDS("CP1779247079345")},
+ {id:"gd-huashan-cat",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-12-26",end:"2026-12-27",deadline:null,fee:null,cats:["design","handmade","art","pets"],mrt:true,pick:true,juried:true,
+  zh:{name:"貓樂園冬日祈福市集",city:"台北市・中正區",venue:"華山 1914 忠孝三角、中三前廣場",sched:"週六日 11:00–19:00",fee:"2 米帳篷單獨位（含桌椅），金額請見報名頁",note:"第三屆；只收貓咪主題的文創、手作"},
+  en:{name:"Cat Paradise Winter Market",city:"Zhongzheng, Taipei",venue:"Huashan 1914 Creative Park",sched:"Sat–Sun 11:00–19:00",fee:"2 m tent with table and stool; see the form for price",note:"3rd edition; cat-themed design and handmade goods only."},
+  apply:GDS("CP1791363410162"),source:GDS("CP1791363410162")},
+ {id:"gd-ansen-winter",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-12-05",end:"2026-12-06",deadline:null,fee:null,cats:["design","handmade","plants","pets","food","drink"],mrt:true,pick:false,juried:true,
+  zh:{name:"冬日暖行",city:"台北市・大安區",venue:"安森町（捷運大安森林公園站旁，室內）",sched:"週六日 11:00–18:00",fee:"3,500 元（含桌椅）；押金 500 元",note:"禁止明火（含蠟燭、線香）"},
+  en:{name:"Winter Warmth",city:"Da'an, Taipei",venue:"Ansen-machi, by MRT Daan Park (indoor)",sched:"Sat–Sun 11:00–18:00",fee:"NT$3,500 incl. table and stool; NT$500 deposit",note:"No open flames, including candles and incense."},
+  apply:GDS("CP1780644311303"),source:GDS("CP1780644311303")},
+ {id:"gd-ansen-yearend",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-12-26",end:"2026-12-27",deadline:null,fee:null,cats:["design","handmade","plants","pets","food","drink"],mrt:true,pick:false,juried:true,
+  zh:{name:"森林歲末所",city:"台北市・大安區",venue:"安森町（捷運大安森林公園站旁）",sched:"週六日 11:00–18:00",fee:"3,500 元（含桌椅）；押金 500 元"},
+  en:{name:"Forest Year-End Market",city:"Da'an, Taipei",venue:"Ansen-machi, by MRT Daan Park",sched:"Sat–Sun 11:00–18:00",fee:"NT$3,500 incl. table and stool; NT$500 deposit"},
+  apply:GDS("CP1780644653015"),source:GDS("CP1780644653015")},
+ {id:"gd-village-nov",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-11-14",end:"2026-11-15",deadline:null,fee:1200,cats:["design","handmade","accessories","apparel","plants","food","drink"],mrt:null,pick:false,juried:true,
+  zh:{name:"村日子｜新年之前",city:"新北市・三重區",venue:"空軍三重一村 14 號眷舍",sched:"週六日 13:00–18:00（兩日連報）",fee:"每日 1,200 元；用電每日加 100 元；押金 500 元",note:"眷村老屋裡的室內小市集"},
+  en:{name:"Village Days: Before the New Year",city:"Sanchong, New Taipei",venue:"Air Force Sanchong No.1 Village, House 14",sched:"Sat–Sun 13:00–18:00 (both days)",fee:"NT$1,200/day; power +NT$100/day; NT$500 deposit",note:"Small indoor market in a historic military village house."},
+  apply:GDS("CP1788348459685"),source:GDS("CP1788348459685")},
+ {id:"gd-village-dec",added:"2026-10-27",org:GD_ORG,region:"north",start:"2026-12-26",end:"2026-12-27",deadline:null,fee:1200,cats:["design","handmade","accessories","apparel","plants","food","drink"],mrt:null,pick:false,juried:true,
+  zh:{name:"村日子｜謝謝生活",city:"新北市・三重區",venue:"空軍三重一村 14 號眷舍",sched:"週六日 13:00–18:00（兩日連報）",fee:"每日 1,200 元；用電每日加 100 元；押金 500 元"},
+  en:{name:"Village Days: Thank You, Life",city:"Sanchong, New Taipei",venue:"Air Force Sanchong No.1 Village, House 14",sched:"Sat–Sun 13:00–18:00 (both days)",fee:"NT$1,200/day; power +NT$100/day; NT$500 deposit"},
+  apply:GDS("CP1788347614436"),source:GDS("CP1788347614436")},
+ {id:"ishands-huashan-xmas",added:"2026-10-27",org:{zh:"愛手創 ISHANDS",en:"ISHANDS"},region:"north",start:"2026-12-24",end:"2026-12-27",deadline:"2026-12-04",fee:null,cats:["handmade","design","accessories","art"],mrt:true,pick:true,juried:true,
+  zh:{name:"華山愛手創聖誕市集－冬日森之集",city:"台北市・中正區",venue:"華山 1914 華山劇場、金八廣場（戶外）",sched:"每日 11:00–20:00",fee:"登入報名系統後才看得到"},
+  en:{name:"ISHANDS Huashan Christmas Market",city:"Zhongzheng, Taipei",venue:"Huashan 1914, Huashan Theater & Jinba Plaza (outdoor)",sched:"Daily 11:00–20:00",fee:"Shown after you log in to the registration system"},
+  apply:"https://order.chaincode.com.tw/TW001136_ishands/login",source:"https://www.ishands.com/eventapply"},
+ {id:"edge-songshan-nov",added:"2026-10-27",org:{zh:"邊緣工事／邊緣人市集",en:"Edge Works"},region:"north",start:"2026-11-14",end:"2026-11-15",deadline:null,fee:null,cats:["handmade","design"],mrt:true,pick:true,juried:true,
+  zh:{name:"邊緣人市集｜松菸場",city:"台北市・信義區",venue:"松山文創園區",sched:"11/14–15",fee:"請見報名表",note:"填表後審核，錄取會寄信通知。費用和截止日請以表單為準"},
+  en:{name:"Edgeman Market at Songshan",city:"Xinyi, Taipei",venue:"Songshan Cultural Park",sched:"Nov 14–15",fee:"See the form",note:"Juried; acceptance by email. Check the form for fees and deadline."},
+  apply:"https://reurl.cc/2lQYgX",source:"https://linktr.ee/edge_work"},
+ {id:"eslite-youngboss-xmas",added:"2026-10-27",org:{zh:"誠品生活 expo",en:"Eslite expo"},region:"north",start:"2026-12-08",end:"2026-12-29",deadline:null,fee:null,cats:["design","art","food","apparel","handmade"],mrt:true,pick:true,juried:true,
+  zh:{name:"肖年頭家耶誕市集",city:"台北市・中山區",venue:"誠品生活南西",sched:"共 22 天",fee:"頁面未列",note:"正式評選制。10/31 截止的是「年度頭家徵選」，耶誕市集有獨立表單，請向主辦確認；需自己派人顧攤"},
+  en:{name:"Young Boss Christmas Market",city:"Zhongshan, Taipei",venue:"Eslite Spectrum Nanxi",sched:"22 days",fee:"Not listed",note:"Formal judging. Oct 31 is the deadline for the annual selection; the Christmas market has its own form, so confirm with the organizer. You staff your own booth."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSe0OrP6NGf_EVqnyu_7UFfZVQNHn-kKt-jHO2hM_s4ICovjBQ/viewform",source:"https://www.eslitexpo.com/youngboss/join"},
+ {id:"sogood-zhubei-xmas",added:"2026-10-27",org:{zh:"好好手感微笑市集",en:"Sogood Market"},region:"north",start:"2026-12-25",end:"2026-12-27",deadline:null,fee:null,cats:["handmade","design"],mrt:false,pick:true,juried:true,
+  zh:{name:"好好手感微笑市集｜竹北場",city:"新竹縣・竹北市",venue:"東興圳公園",sched:"12/25–27（五～日）",fee:"請見報名表",note:"同一份報名表可報台中、高雄、竹北三場；錄取結果以 email 通知"},
+  en:{name:"Sogood Market · Zhubei",city:"Zhubei, Hsinchu County",venue:"Dongxingzhen Park",sched:"Dec 25–27 (Fri–Sun)",fee:"See the form",note:"One form covers the Taichung, Kaohsiung and Zhubei markets; results by email."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLScGMsfeVErWT5dV3yBKk-zZfj-g8deZN2_mBSNwi-Tt9MuDUw/viewform",source:"https://www.sogoodmarket.com/4529-2/"},
+ {id:"sogood-taichung-dec",added:"2026-10-27",org:{zh:"好好手感微笑市集",en:"Sogood Market"},region:"central",start:"2026-12-06",end:"2026-12-06",deadline:null,fee:null,cats:["handmade","design"],mrt:false,pick:true,juried:true,
+  zh:{name:"好好手感微笑市集｜台中綠美圖場",city:"台中市・西屯區",venue:"台中綠美圖",sched:"12/6（日）",fee:"請見報名表",note:"同一份報名表可報台中、高雄、竹北三場；錄取結果以 email 通知"},
+  en:{name:"Sogood Market · Taichung Green Museumbrary",city:"Xitun, Taichung",venue:"Taichung Green Museumbrary",sched:"Dec 6 (Sun)",fee:"See the form",note:"One form covers the Taichung, Kaohsiung and Zhubei markets; results by email."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLScGMsfeVErWT5dV3yBKk-zZfj-g8deZN2_mBSNwi-Tt9MuDUw/viewform",source:"https://www.sogoodmarket.com/4529-2/"},
+ {id:"sogood-kmfa-dec",added:"2026-10-27",org:{zh:"好好手感微笑市集",en:"Sogood Market"},region:"south",start:"2026-12-12",end:"2026-12-13",deadline:null,fee:null,cats:["handmade","design"],mrt:true,pick:true,juried:true,
+  zh:{name:"好好手感微笑市集｜高美館場",city:"高雄市・鼓山區",venue:"高雄市立美術館",sched:"12/12–13（六日）",fee:"請見報名表",note:"同一份報名表可報台中、高雄、竹北三場；錄取結果以 email 通知"},
+  en:{name:"Sogood Market · Kaohsiung Museum of Fine Arts",city:"Gushan, Kaohsiung",venue:"Kaohsiung Museum of Fine Arts",sched:"Dec 12–13 (Sat–Sun)",fee:"See the form",note:"One form covers the Taichung, Kaohsiung and Zhubei markets; results by email."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLScGMsfeVErWT5dV3yBKk-zZfj-g8deZN2_mBSNwi-Tt9MuDUw/viewform",source:"https://www.sogoodmarket.com/4529-2/"},
+ {id:"lole-xmas-charlotte",added:"2026-10-27",org:{zh:"小蝸牛市集",en:"Lole Market"},region:"central",start:"2026-12-25",end:"2026-12-27",deadline:null,fee:null,cats:["handmade","design","food"],mrt:false,pick:true,juried:true,
+  zh:{name:"小蝸牛市集｜耶誕年末場「年末臨時辦事處」",city:"台中市・西區",venue:"夏綠地公園",sched:"12/25–27（五～日）",fee:"請見報名表",note:"報名方式：在 IG 招募貼文底下留言「🐌」，主辦會私訊報名表給你"},
+  en:{name:"Lole Market Christmas & Year-End",city:"West Dist., Taichung",venue:"Charlotte Park",sched:"Dec 25–27 (Fri–Sun)",fee:"See the form",note:"To apply, comment 🐌 under the Instagram recruitment post and the organizer will DM you the form."},
+  apply:"https://www.instagram.com/p/De3COJWyFB7/",source:"https://www.instagram.com/p/De3COJWyFB7/"},
+ {id:"kh-culture-center-art-2027",added:"2026-10-27",org:{zh:"高雄市政府文化局",en:"Kaohsiung Cultural Affairs Bureau"},gov:{zh:"高雄市政府文化局",en:"Kaohsiung City Government"},region:"south",start:"2027-01-02",end:"2027-04-25",deadline:"2026-12-10",opens:"2026-12-01",fee:0,cats:["art","handmade"],mrt:true,pick:false,
+  zh:{name:"文化中心藝術市集（116 年第 1 期）",city:"高雄市・苓雅區",venue:"文化中心藝術大道（五福一路 67 號）",sched:"1–4 月每週六、日 16:00–21:30",fee:"免費",note:"限持高雄市街頭藝人證（視覺藝術、創意工藝類）。每天 115 組，超過名額就抽籤"},
+  en:{name:"Kaohsiung Cultural Center Art Market (2027 Term 1)",city:"Lingya, Kaohsiung",venue:"Cultural Center Art Avenue, 67 Wufu 1st Rd",sched:"Sat & Sun, Jan–Apr 2027, 16:00–21:30",fee:"Free",note:"Kaohsiung street-artist licence (visual art or craft) required. 115 spots a day; lottery if oversubscribed."},
+  apply:"https://busker.kcg.gov.tw/ArtMarket_Register/index?Parser=99,10,18",source:"https://busker.kcg.gov.tw/content/index?Parser=1,10,90"},
+ {id:"chiayi-shiguang-2026",added:"2026-10-27",org:{zh:"職原市",en:"Original Craftsman Market"},gov:{zh:"嘉義市政府文化局",en:"Chiayi City Cultural Affairs Bureau"},region:"south",start:"2026-11-07",end:"2026-11-08",deadline:null,fee:600,cats:["handmade","design","apparel","pets","food","drink"],mrt:false,pick:true,
+  zh:{name:"什光市集（2026 桃城文學什光紀）",city:"嘉義市・東區",venue:"森林之歌（文化路）",sched:"11/7–8　14:00–20:00",fee:"600 元起＋保證金 500 元",note:"桌巾限白色或米白色、只能用黃光；不能放立牌"},
+  en:{name:"Shiguang Market (Taocheng Literature Festival 2026)",city:"East Dist., Chiayi City",venue:"Song of Forest, Wenhua Rd",sched:"Nov 7–8, 14:00–20:00",fee:"From NT$600 + NT$500 deposit",note:"White or off-white tablecloths and warm lighting only; no standing signs."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLScrDYvNMbyu3t5GpvvqUnhOTGFcFZS-S6sjXIcGywvDCnCbaA/viewform",source:"https://www.cna.com.tw/postwrite/chi/447333"},
+ {id:"kh-opera-outdoor-2",added:"2026-10-27",org:{zh:"外台歌仔戲 2.0",en:"Outdoor Taiwanese Opera 2.0"},gov:{zh:"國立傳統藝術中心",en:"National Center for Traditional Arts"},region:"south",start:"2026-11-28",end:"2026-12-13",segs:[["2026-11-28","2026-11-29"],["2026-12-05","2026-12-06"],["2026-12-12","2026-12-13"]],deadline:null,fee:null,cats:["food","drink","handmade"],mrt:null,pick:false,
+  zh:{name:"外台歌仔戲 2.0 市集",city:"高雄市・左營區",venue:"高雄傳藝園區 中山堂外草坪",sched:"11/28–29、12/5–6、12/12–13　15:00–21:00",fee:"2,000 元起（一週兩日）＋保證金 500 元",note:"只收古早味小吃和傳統手藝，不收現代文創"},
+  en:{name:"Outdoor Taiwanese Opera 2.0 Market",city:"Zuoying, Kaohsiung",venue:"Kaohsiung Traditional Arts Park, lawn outside Zhongshan Hall",sched:"Nov 28–29, Dec 5–6, Dec 12–13 · 15:00–21:00",fee:"From NT$2,000 per weekend + NT$500 deposit",note:"Old-style snacks and traditional crafts only."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSfiq-6ZgxJpHzQrBg-ZeE0KSPBrisU6QbM3yKt6W10j2nDwLw/viewform",source:S17},
+ {id:"pingtung-chaohaowan-nov",added:"2026-10-27",org:{zh:"潮好玩市集",en:"Chaohaowan Market"},gov:{zh:"屏東縣政府場域",en:"Pingtung County venue"},region:"south",start:"2026-11-15",end:"2026-11-15",deadline:null,fee:null,cats:["food","drink","handmade"],mrt:false,pick:false,
+  zh:{name:"潮好玩市集－妖怪森林音樂會 × 好聲市集",city:"屏東縣・潮州鎮",venue:"潮好玩幸福村（光春路 292 號）",sched:"11/15（日）12:00–17:00",fee:"請見報名表",note:"每攤提供 10A 電，用更多要自備靜音發電機"},
+  en:{name:"Chaohaowan Market: Yokai Forest Concert",city:"Chaozhou, Pingtung",venue:"Chaohaowan Happy Village, 292 Guangchun Rd",sched:"Nov 15 (Sun), 12:00–17:00",fee:"See the form",note:"10A power per booth; bring a quiet generator for more."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSct6fpNIdk7zUrlgVOzBRIGoOj38n6WFdJmlCbdgA6G8ErN1g/viewform",source:"https://17847market.com.tw/"},
+ {id:"village-newtaipei-xmas",org:{zh:"村舍集市",en:"Village Market"},region:"north",start:"2026-11-21",end:"2026-12-20",segs:[["2026-11-21","2026-11-22"],["2026-11-28","2026-11-29"],["2026-12-05","2026-12-06"],["2026-12-19","2026-12-20"]],deadline:null,fee:1600,cats:["design","handmade","food"],mrt:true,pick:true,
+  zh:{name:"村舍集市・2026 新北耶誕城",city:"新北市・板橋區",venue:"府中廣場、府中徒步區（捷運府中站 2 號出口）",sched:"11/21–22、11/28–29、12/5–6、12/19–20　14:00–22:00",fee:"1,600 元起"},
+  en:{name:"Village Market at New Taipei Christmasland",city:"Banqiao, New Taipei",venue:"Fuzhong Plaza (MRT Fuzhong Exit 2)",sched:"Nov 21–22, 28–29, Dec 5–6, 19–20 · 14:00–22:00",fee:"From NT$1,600"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSddfX1bYA_J0VMsfdfcEHt7bnSTeB79G6KU-bdaMgmRhc0k9Q/viewform",source:S17},
+ {id:"hun-taipei-nov",org:{zh:"混市集",en:"Hun Market"},region:"north",start:"2026-11-06",end:"2026-11-29",segs:[["2026-11-06","2026-11-08"],["2026-11-13","2026-11-15"],["2026-11-20","2026-11-22"],["2026-11-27","2026-11-29"]],deadline:null,fee:1000,cats:["handmade","design","food"],mrt:true,pick:false,
+  zh:{name:"混市集 2026・十一月",city:"台北市・大安區",venue:"頂好廣場、瑠公公園一帶（主辦分配）",sched:"每週五～日 16:00–22:00",fee:"1,000 元起"},
+  en:{name:"Hun Market · November",city:"Da'an, Taipei",venue:"Dinghao Plaza / Liugong Park area (assigned)",sched:"Every Fri–Sun, 16:00–22:00",fee:"From NT$1,000"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSe1oYjeir-dIM1Hd8TeUNa92vbhFpS2_wQTLsC4eCKhRZ_8Fg/viewform",source:S17},
+ {id:"leofoo-countdown",org:{zh:"好識集 × 六福村",en:"Haoshi Market × Leofoo Village"},region:"north",start:"2026-12-31",end:"2026-12-31",deadline:null,fee:2500,cats:["design","food","drink"],mrt:false,pick:true,
+  zh:{name:"2027 跨年煙火市集",city:"新竹縣・關西鎮",venue:"六福村主題遊樂園",sched:"12/31 09:00–翌日 00:30",fee:"2,500 元＋保證金 1,000 元"},
+  en:{name:"New Year's Eve Fireworks Market",city:"Guanxi, Hsinchu County",venue:"Leofoo Village Theme Park",sched:"Dec 31, 09:00–00:30",fee:"NT$2,500 + NT$1,000 deposit"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSeQjW7WuHVH57UxtshqDNUkp1TQSjH3tqmDn7cjxbhU5tjFAw/viewform",source:S17},
+ {id:"yilan-zhongxing-b7",org:{zh:"宜蘭中興文創園區",en:"Yilan Zhongxing Cultural Park"},gov:{zh:"宜蘭縣政府場域",en:"Yilan County venue"},region:"east",start:"2026-11-21",end:"2026-11-22",deadline:null,fee:0,cats:["food","drink","art","handmade","farm"],mrt:false,pick:false,
+  zh:{name:"假日市集品牌招募【第 7 梯次】",city:"宜蘭縣・五結鄉",venue:"中興文創園區 55 號空間、光合屋",sched:"週六日 10:00–18:00（需全程參與）",fee:"免攤位費；押金 2,000 元（無違規全退）",note:"有餐車類別"},
+  en:{name:"Weekend Market, Batch 7",city:"Wujie, Yilan",venue:"Zhongxing Cultural & Creative Park",sched:"Sat–Sun 10:00–18:00 (both days)",fee:"No booth fee; NT$2,000 refundable deposit",note:"Food trucks accepted."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSclo_a1mDG106sFl_8OQt93yHr1GM1ioxxLl9CdxIzLuPhHWA/viewform",source:"https://17847market.com.tw/"},
+ {id:"shenji-mumu-jan",added:"2026-10-27",org:{zh:"審計新村 暮暮市集",en:"Shenji Village Mumu Market"},region:"central",start:"2027-01-01",end:"2027-01-31",deadline:"2026-11-19",opens:"2026-11-15",fee:550,cats:["handmade","design","secondhand","food","drink"],mrt:false,pick:true,juried:true,
+  zh:{name:"審計新村 2027 年 1 月攤位",city:"台中市・西區",venue:"審計新村",sched:"每天；平日約 13:30–18:00，假日約 11:00–18:30",fee:"平日 550 元；假日 1,200 元起",note:"每月 15–19 日開放報名「下下個月」；23 日公告結果，27 日前繳費"},
+  en:{name:"Shenji Village stalls, January 2027",city:"West Dist., Taichung",venue:"Shenji New Village",sched:"Daily; weekdays ~13:30–18:00, weekends ~11:00–18:30",fee:"Weekday NT$550; weekend from NT$1,200",note:"Applications open on the 15th–19th of each month for the month after next. Results on the 23rd; pay by the 27th."},
+  apply:"https://twmarketday.com/user/order",source:"https://twmarketday.com/user/marketInfo?siteId=2"},
+ {id:"closet-taichung",org:{zh:"OPEN THE CLOSET",en:"OPEN THE CLOSET"},region:"central",start:"2026-11-28",end:"2026-11-29",deadline:null,fee:900,cats:["design","apparel","food","drink"],mrt:false,pick:false,
+  zh:{name:"OPEN THE CLOSET｜今晚，把喜歡穿出來",city:"台中市・南區",venue:"富興工廠 1962",sched:"11/28–29　15:00–20:00",fee:"900 元起",note:"以生活選物為主，餐飲名額很少"},
+  en:{name:"OPEN THE CLOSET",city:"South Dist., Taichung",venue:"Fuxing Factory 1962",sched:"Nov 28–29, 15:00–20:00",fee:"From NT$900",note:"Mainly curated lifestyle goods; very few food spots."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSeJaCUn9Q5iAWFEWGflpeBBWuAl4-7VZ1ptf5YTWwuFUYdehg/viewform",source:S17},
+ {id:"singlecell-nantou",org:{zh:"單細胞市集",en:"Single Cell Market"},region:"central",start:"2026-12-25",end:"2026-12-27",deadline:null,fee:900,cats:["art","handmade","food","drink"],mrt:false,pick:false,
+  zh:{name:"欣美落羽松園區・聖誕市集",city:"南投縣・名間鄉",venue:"欣美創意園區 落羽松園區",sched:"12/25–27　10:00–17:00",fee:"900 元起"},
+  en:{name:"Christmas Market at Xinmei Bald Cypress Park",city:"Mingjian, Nantou",venue:"Xinmei Creative Park",sched:"Dec 25–27, 10:00–17:00",fee:"From NT$900"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSeCvCKQ1-2-D_-gXgJYNmm3IVR8eqLCfL1DSrzXTO5y2zQ0vw/viewform",source:S17},
+ {id:"craftsman-pier2-dayi",added:"2026-10-27",org:CRAFTSMAN,region:"south",start:"2026-11-14",end:"2026-11-15",deadline:null,fee:null,cats:["handmade","design"],mrt:false,pick:true,juried:true,
+  zh:{name:"職原市｜駁二大義倉庫棧",city:"高雄市・鹽埕區",venue:"駁二大義倉庫（輕軌駁二大義站）",sched:"11/14–15",fee:"請見報名表",note:"依報名先後審核；重複報名會以最新一筆為準、往後排"},
+  en:{name:"Original Craftsman Market at Pier-2 Dayi",city:"Yancheng, Kaohsiung",venue:"Pier-2 Dayi Warehouses (LRT Pier-2 Dayi)",sched:"Nov 14–15",fee:"See the form",note:"Reviewed in order received; applying twice moves you to the back."},
+  apply:"https://forms.gle/6JTkMyY5PwuCULLP6",source:"https://linktr.ee/origianl_craftsman_market"},
+ {id:"craftsman-kmc-nflying",added:"2026-10-27",org:CRAFTSMAN,region:"south",start:"2026-11-21",end:"2026-11-22",deadline:null,fee:null,cats:["handmade","design","food"],mrt:false,pick:true,juried:true,
+  zh:{name:"高流海音館 N.Flying 演唱會市集",city:"高雄市・鹽埕區",venue:"高雄流行音樂中心 海音館（輕軌真愛碼頭站）",sched:"演唱會兩天",fee:"請見報名表"},
+  en:{name:"Concert Market at Kaohsiung Music Center (N.Flying)",city:"Yancheng, Kaohsiung",venue:"Kaohsiung Music Center (LRT Love Pier)",sched:"Both concert days",fee:"See the form"},
+  apply:"https://forms.gle/Q9NpsFjnJtmifrzb8",source:"https://linktr.ee/origianl_craftsman_market"},
+ {id:"craftsman-kmc-yesung",added:"2026-10-27",org:CRAFTSMAN,region:"south",start:"2026-11-28",end:"2026-11-29",deadline:null,fee:null,cats:["handmade","design","food"],mrt:false,pick:true,juried:true,
+  zh:{name:"高流海音館 藝聲演唱會市集",city:"高雄市・鹽埕區",venue:"高雄流行音樂中心 海音館",sched:"演唱會兩天",fee:"請見報名表"},
+  en:{name:"Concert Market at Kaohsiung Music Center (Yesung)",city:"Yancheng, Kaohsiung",venue:"Kaohsiung Music Center",sched:"Both concert days",fee:"See the form"},
+  apply:"https://forms.gle/56wrJmkrDmzv9f4D7",source:"https://linktr.ee/origianl_craftsman_market"},
+ {id:"craftsman-gooddays-tainan",org:{zh:"職原市 × 好日子",en:"Original Craftsman × Good Days"},region:"south",start:"2026-12-05",end:"2026-12-06",deadline:null,fee:250,cats:["handmade","food"],mrt:false,pick:true,
+  zh:{name:"2026 樂音森林",city:"台南市・南區",venue:"水交社文化園區（興中街 118 號）",sched:"12/5–6　12:00–18:00",fee:"250 元起＋保證金 500 元"},
+  en:{name:"Music Forest 2026",city:"South Dist., Tainan",venue:"Shuijiaoshe Cultural Park",sched:"Dec 5–6, 12:00–18:00",fee:"From NT$250 + NT$500 deposit"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSeAr_XBdP-qQ1vYLKTdqzBFbohvrkFK01wydIrE29_9GkZmhA/viewform",source:S17},
+ {id:"witch-kaohsiung",org:{zh:"巫呼呼市集",en:"Woohoo Witch Market"},region:"south",start:"2026-11-21",end:"2026-11-22",deadline:null,fee:1200,cats:["handmade","accessories"],mrt:true,pick:true,
+  zh:{name:"巫呼呼市集・秋喜童話",city:"高雄市・新興區",venue:"捷運美麗島站 BC 區廊道",sched:"11/21–22　12:00–18:00",fee:"1,200 元起",note:"主題：魔法、占卜、療癒手作、礦石"},
+  en:{name:"Woohoo Witch Market · Autumn Fairy Tale",city:"Xinxing, Kaohsiung",venue:"MRT Formosa Boulevard Station, BC corridor",sched:"Nov 21–22, 12:00–18:00",fee:"From NT$1,200",note:"Theme: magic, fortune-telling, healing crafts, crystals."},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSd02r5u46AWy5nzJSO3b6bR5t6kDJEL2beJz2vS5YpZyJYjMw/viewform",source:"https://17847market.com.tw/"},
+ {id:"pier2-penglai-winter",org:{zh:"眷人吉市",en:"Juanren Market"},region:"south",start:"2026-12-12",end:"2026-12-13",deadline:null,fee:2000,cats:["handmade","food","drink"],mrt:true,pick:true,
+  zh:{name:"駁二蓬萊｜冬日植光 Part I",city:"高雄市・鹽埕區",venue:"駁二藝術特區 蓬萊區戶外廣場",sched:"12/12–13　14:00–20:00",fee:"2,000 元起＋保證金 500 元"},
+  en:{name:"Winter Plant Light Part I at Pier-2",city:"Yancheng, Kaohsiung",venue:"Pier-2 Art Center, Penglai outdoor plaza",sched:"Dec 12–13, 14:00–20:00",fee:"From NT$2,000 + NT$500 deposit"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLSfQBZzwKmY_633JjkLQxo5SVwTxNrEcptVElAYBiwgWhAoKuw/viewform",source:S17},
+ {id:"dreammall-bohemian-xmas",org:{zh:"波西米亞童話聖誕市集",en:"Bohemian Fairy-Tale Christmas Market"},region:"south",start:"2026-12-19",end:"2026-12-20",deadline:null,fee:3000,cats:["handmade","art","food","drink"],mrt:false,pick:true,
+  zh:{name:"2026 波西米亞童話聖誕市集 @夢時代",city:"高雄市・前鎮區",venue:"統一夢時代 水池廣場",sched:"12/19–20　14:00–20:00",fee:"每日 3,000 元起＋保證金"},
+  en:{name:"Bohemian Christmas Market @ Dream Mall",city:"Qianzhen, Kaohsiung",venue:"Dream Mall fountain plaza",sched:"Dec 19–20, 14:00–20:00",fee:"From NT$3,000/day + deposit"},
+  apply:"https://docs.google.com/forms/d/e/1FAIpQLScpuk7DYTKPmkhzCW8IYSXkp9GhfKUOfn392YsWuPMtDBdBEg/viewform",source:S17}
+];
+
+const ORGS = [
+ {zh:"好好手感微笑市集",en:"Sogood Market",ig:"sogoodmarket",region:"north",link:"https://www.sogoodmarket.com/joinus/",
+  wzh:"手作市集；國父紀念館、中正紀念堂、高雄美術館。春季、秋季和 12 月聖誕場，招募公告在 IG／Threads。",wen:"Handmade markets at Sun Yat-sen and CKS Memorial Halls and the Kaohsiung Museum of Fine Arts. Spring, autumn and December Christmas editions; calls posted on IG/Threads."},
+ {zh:"小蝸牛市集",en:"Lole Market",ig:"lolemarket",region:"central",link:"https://www.lolemarket.com/faq",
+  wzh:"台中小農＋設計市集，在臺中州廳、夏綠地公園等地輪流舉辦；每場的報名表放在活動頁。",wen:"Taichung farmers and design market, rotating between the Prefectural Hall, Charlotte Park and more. Each event page carries its own form."},
+ {zh:"Pinkoi 實體活動",en:"Pinkoi Offline Events",ig:"pinkoi_event_tw",region:"north",link:"https://blog.pinkoi.com/tw/news/expo/pinkoi-2026market/",
+  wzh:"設計品牌展會：6 月品品節（松菸）、10–11 月 Design Fest（圓山）。",wen:"Design-brand fairs: PinPin Fest in June (Songshan), Design Fest in Oct–Nov (Expo Dome)."},
+ {zh:"邊緣工事／邊緣人市集",en:"Edge Works",ig:"edge_work",region:"north",link:"https://linktr.ee/edge_work",
+  wzh:"全台場次最多的主辦之一：松菸、駁二常態場，也承辦音樂祭市集（臺北爵士音樂節、浪人祭）。",wen:"One of Taiwan's busiest organizers: regular Songshan and Pier-2 markets, plus festival markets (Taipei Jazz Festival, Vagabond Fest)."},
+ {zh:"愛手創 ISHANDS",en:"ISHANDS",ig:"ishands.asia",region:"north",link:"https://www.ishands.com/eventapply",
+  wzh:"台北幾乎每月都有：心中山、捷運站、美麗華、華山。",wen:"Nearly monthly in Taipei: Zhongshan linear park, MRT stations, Miramar, Huashan."},
+ {zh:"散步遊者市集",en:"Somnambulist Market",ig:"somnambulist.mrkt",region:"north",link:"https://sleepwalkermrkt.com/register",
+  wzh:"台北松菸、高雄駁二的週末場；要先註冊品牌會員才看得到場次。注意：禁止用 AI 生成的商品圖、菜單、文宣，報名照片也算。",wen:"Weekend markets at Songshan (Taipei) and Pier-2 (Kaohsiung). Register as a brand member to see events. Note: AI-generated product photos, menus and signage are banned, including in your application photos."},
+ {zh:"碌人．散步",en:"Lu Ren Stroll Market",ig:"ru_market",region:"central",link:"https://www.instagram.com/ru_market/",
+  wzh:"台中：文心森林公園、民俗公園等，有主題夜市和聖誕場。",wen:"Taichung: Wenxin Forest Park, Folk Park and more; themed night and Christmas editions."},
+ {zh:"好日市集",en:"Good Days Market (Taipei)",ig:null,region:"north",link:"https://gds.apothecary1969.com/web/activity/activity.jsp",
+  wzh:"松菸、華山、花博的審核制市集，用自家報名系統。下一個大場是 2027 年 4 月松菸「戀舊同樂會」。",wen:"Juried markets at Songshan, Huashan and Expo Park, via its own sign-up system. Next big one: April 2027 at Songshan."},
+ {zh:"職原市職人創意市集",en:"Original Craftsman Market",ig:null,region:"south",link:"https://linktr.ee/origianl_craftsman_market",
+  wzh:"高雄、台南；駁二、高雄流行音樂中心的演唱會場。每場表單放在 Linktree。",wen:"Kaohsiung and Tainan, including Pier-2 and concert markets at the Kaohsiung Music Center. Forms on its Linktree."},
+ {zh:"臺北爵士音樂節",en:"Taipei Jazz Festival",ig:"taipei_jazz_festival",region:"north",link:"https://www.instagram.com/taipei_jazz_festival/",
+  wzh:"每年 10 月在臺北流行音樂中心；市集由邊緣工事招募。2026 年已結束。",wen:"Every October at Taipei Music Center; the market is recruited by Edge Works. 2026 is over."},
+ {zh:"桃園鐵玫瑰音樂節",en:"Taoyuan Iron Rose Festival",ig:"iron_rose_music",region:"north",link:"https://ironrose.com.tw/",
+  wzh:"每年 10 月在中壢；2026 年已結束。",wen:"Every October in Zhongli; 2026 is over."},
+ {zh:"高雄啤酒音樂節",en:"Kaohsiung Beer Rock Fest",ig:"beerrockfest",region:"south",link:"https://www.facebook.com/beerrockfes/",
+  wzh:"夢時代時代大道；啤酒節在 7 月。目前沒看到攤商招募。",wen:"Dream Mall; the beer fest is in July. No vendor call found yet."},
+ {zh:"奇美博物館",en:"Chimei Museum",ig:"chimeimuseum",region:"south",link:"https://www.chimeimuseum.org/news/6867998b8efa4/detail",
+  wzh:"台南；12 月聖誕週末有上百攤市集（2025 年暫停，2026 年尚未公告）。",wen:"Tainan; a 100+ booth Christmas Weekend market in December (paused in 2025; 2026 not announced)."},
+ {zh:"簡單生活節",en:"Simple Life Festival",ig:"simplelifetw",region:"north",link:"https://simplelife.streetvoice.com/",
+  wzh:"大型音樂與生活風格節，品牌市集另外招募。2026 年尚未公告。",wen:"Large music and lifestyle festival with a separately recruited brand market. 2026 not announced yet."},
+ {gov:true,zh:"竹風好市集",en:"Zhufeng Good Market",ig:null,region:"north",link:"https://www.hsinchucitygoods.com/way",
+  wzh:"新竹市政府主辦，9–11 月週末在護城河舉辦，免攤位費。每年 7–8 月招募，限新竹市登記或營業的品牌，或過去一年在新竹市市集出攤 3 次以上。",wen:"Run by Hsinchu City Government; weekends Sep–Nov along the city moat, free booths. Call in Jul–Aug, for Hsinchu-registered brands or those with 3+ Hsinchu market appearances in the past year."},
+ {gov:true,zh:"新北耶誕市集",en:"New Taipei Christmas Market",ig:null,region:"north",link:"https://www.economic.ntpc.gov.tw/Api/News/Page?id=8319",
+  wzh:"新北市經發局主辦，10 月初招募、11 月底在市民廣場舉辦，限新北市登記的業者。2026 年已截止。",wen:"New Taipei Economic Development Dept; call in early October, market late November at Citizen Plaza, New Taipei-registered businesses only. 2026 call closed."},
+ {gov:true,zh:"士林官邸鬱金香展市集",en:"Shilin Residence Tulip Festival Market",ig:null,region:"north",link:"https://www-ws.gov.taipei/001/Upload/348/relfile/31811/9512204/3bf60ff6-189c-4a3b-82ea-3295933f7a0a.pdf",
+  wzh:"臺北市公園處；2026 年的招募到 1/2 截止，市集在 2–3 月。2027 年的招募預計 12 月左右公告。",wen:"Taipei Parks Office; the 2026 call closed Jan 2 for a Feb–Mar market. Expect the 2027 call around December."},
+ {gov:true,zh:"中臺灣元宵燈會市集",en:"Central Taiwan Lantern Festival Market",ig:null,region:"central",link:"https://travel.taichung.gov.tw/zh-tw/event/newsdetail/9409",
+  wzh:"臺中市觀旅局；上一次招募是 11 月中到 12 月初，2027 年的預計 11 月中公告。",wen:"Taichung Tourism Bureau; the last call ran mid-Nov to early Dec, so expect the 2027 call around mid-November."},
+ {gov:true,zh:"2027 台灣燈會（苗栗）",en:"2027 Taiwan Lantern Festival (Miaoli)",ig:null,region:"central",link:"https://edb.tycg.gov.tw/News_Content.aspx?n=3749&sms=9954&s=1407922",
+  wzh:"2027/2/20–3/7 在苗栗後龍高鐵特區，攤商招募還沒公告。參考：2025 年主辦城市 12 月開放招募，在地業者優先。",wen:"Feb 20–Mar 7, 2027 at the Miaoli HSR area; no vendor call yet. For reference, the 2025 host city opened its call in December with priority for local vendors."},
+ {gov:true,zh:"臺北客庄小禾埕市集",en:"Taipei Hakka Market",ig:null,region:"north",link:"https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=25764D215742C66F",
+  wzh:"臺北市客委會；8 月招募、10 月舉辦，以客家品牌為主。",wen:"Taipei Hakka Affairs Commission; call in August, market in October, for Hakka brands."},
+ {gov:true,zh:"高雄原民會市集",en:"Kaohsiung Indigenous Markets",ig:null,region:"south",link:"https://coia.kcg.gov.tw",
+  wzh:"TAKAO 豐潮、Miaca' 市集；限設籍高雄、18 歲以上的原住民，不收攤位費。春、秋兩季招募。",wen:"TAKAO and Miaca' markets for indigenous vendors 18+ registered in Kaohsiung; no booth rent. Calls in spring and autumn."},
+ {gov:true,zh:"高美館 小世界市集",en:"KMFA Small World Market",ig:null,region:"south",link:"https://www.kmfa.gov.tw/ArtBioPark/activity/ArtMarket.htm",
+  wzh:"高雄市立美術館；沒有公開表單，要打電話報名：(07)555-0331 分機 267。",wen:"Kaohsiung Museum of Fine Arts; no public form. Apply by phone: (07)555-0331 ext. 267."},
+ {gov:true,zh:"駁二小夜埕",en:"Pier-2 Lunar New Year Night Market",ig:null,region:"south",link:"https://pier2.org/news/177/",
+  wzh:"高雄駁二的過年市集，2026 年有 250 多個品牌。2027 年的招募還沒公告。",wen:"Pier-2's Lunar New Year market, 250+ brands in 2026. The 2027 call isn't posted yet."},
+ {gov:true,zh:"花蓮文創園區",en:"Hualien Cultural & Creative Park",ig:null,region:"east",link:"https://hualien1913.nat.gov.tw",
+  wzh:"活動市集大約在一個月前招募，保證金 1,000 元。",wen:"Festival markets recruit about a month ahead; NT$1,000 deposit."},
+ {gov:true,zh:"花博農民市集",en:"Expo Park Farmers' Market",ig:null,region:"north",link:"https://expofarmersmarket.taipei/",
+  wzh:"台北花博公園，只收農友。",wen:"Taipei Expo Park; farmers only."},
+ {zh:"248 農學市集",en:"248 Farmers' Market",ig:null,region:"north",link:"https://248.com.tw/?p=5520",
+  wzh:"只收農友與生產者，會先到產地拜訪，希望長期參與。",wen:"Farmers and producers only. They visit your farm first and expect long-term participation."}
+];
+
+const GLOSS = [
+ ["品牌名稱","Brand / shop name"],["負責人","Person in charge"],["聯絡電話","Phone (usually a Taiwan mobile, 09xx)"],["LINE ID","LINE app ID, the main contact channel in Taiwan"],
+ ["粉專","Facebook page (IG link often asked too)"],["商品類別","Product category"],["手作／文創／餐飲／輕食","Handmade / design goods / food & drink / light snacks"],
+ ["商品照片／攤位照","Product photos / photo of a past booth"],["價格帶","Price range"],["不收代購／不收批貨","No resold or wholesale goods; must be your own products"],
+ ["審核制","Juried: applying doesn't guarantee a spot"],["先搶先贏／額滿為止","First come, first served / until full"],["正取／備取","Accepted / waitlisted"],["錄取通知","Acceptance notice"],
+ ["攤位尺寸","Booth size (e.g. 3×3 m)"],["自備帳篷／桌椅","Bring your own tent / table and chairs"],["提供／自備","Provided / bring your own"],
+ ["用電／瓦數","Electricity / wattage (often extra; limits apply)"],["延長線","Extension cord"],["用水／用火／瓦斯","Water / open flame / gas"],
+ ["攤位費／場地費","Booth fee"],["保證金／押金","Deposit, refunded if you follow the rules"],["清潔費","Cleaning fee"],
+ ["匯款／轉帳","Bank transfer"],["匯款帳號後五碼","Last 5 digits of the account you paid from"],["逾期視同放棄","Pay late and you lose your spot"],
+ ["統一編號（統編）","8-digit business tax ID, only if you have one"],["收據／發票","Receipt / uniform invoice"],["食品業者登錄字號","Food business registration number"],
+ ["公共意外責任險","Public liability insurance"],["報到","Check in on the day"],["進場／佈置時間","Load-in / setup time"],["撤攤","Pack up and leave"],
+ ["提早撤攤","Leaving early (often loses the deposit)"],["退費規定","Refund policy"],["雨天備案／颱風停辦","Rain plan / cancelled for typhoon"],
+ ["缺席／黑名單","No-show / barred from future events"],["攤位不可指定","You can't choose your spot"],["居留證號","ARC number"]
+];
+
+const T = {
+ zh:{search:"搜尋市集名稱、主辦方、城市…",region:"地區",cat:"類別",status:"報名狀態",month:"市集月份",all:"全部",monthAll:"所有月份",
+  regions:{north:"北部",central:"中部",south:"南部",east:"東部"},
+  cats:{handmade:"手作",design:"設計選物",food:"餐飲",drink:"飲品",apparel:"服飾",accessories:"飾品",kids:"親子",pets:"寵物",plants:"植栽",secondhand:"二手",farm:"小農",art:"插畫藝術"},
+  st:{active:"可報名＋即將開放",closing:"即將截止",upcoming:"尚未開放",closed:"已截止／已結束"},
+  quick:{pick:"精選主辦",gov:"政府合作",weekend:"這週末",closing:"7 天內截止",cheap:"低攤費（每日 1,000 元內）",mrt:"近捷運／輕軌",fav:"我的收藏"},
+  pill:{open:"報名中",tbd:"報名中",closing:d=>d===0?"今天截止":`${d} 天後截止`,upcoming:d=>`${d} 開放報名`,closed:"已截止",ended:"已結束",pick:"精選",juried:"審核制"},
+  fee:"攤位費",when:"時間",dl:"報名截止",dlNone:"未公布，請以報名表為準",opensOn:"開放報名",openNow2:"已開放，建議盡早報名",
+  apply:"前往報名",remind:"設定提醒",close:"收起提醒",src:"資料來源",fav:"收藏",unfav:"取消收藏",
+  base:"提醒我在",baseOpen:"開放報名日",baseDl:"報名截止日",baseStart:"市集第一天",before:"的前",days:"天",
+  res:(d,w)=>`會在 ${d}（${w}）早上 9 點提醒你`,past:"這天已經過了，請選少一點天數。",
+  ics:"加入 iPhone／Outlook 行事曆",gcal:"加入 Google 日曆",
+  icsHint:"iPhone 下載後點開，就會跳出「加入行事曆」，提醒時間會一起帶入。",
+  icsNo:"這個預覽頁面不能下載行事曆檔，請先用 Google 日曆。",icsSaved:"已下載，點開檔案就能加入行事曆。",icsDeclined:"已取消下載。",
+  gHint:"Google 日曆會在提醒當天建立一個事件，並用你的預設通知。",notify:"到時通知我",report:"資料有誤？回報",fb:"回報錯誤／推薦市集",more:"看詳情",less:"收起",openShort:"已開放",buddyAsk:"要我提醒你嗎？時間到我叫你前往報名！",buddyDone:"設好了！時間到我會叫你前往報名～",icsNative:"加入 iPhone 行事曆",nativeHint:"「到時通知我」會在提醒當天早上 9 點跳通知；「加入 iPhone 行事曆」會把活動和提醒一起寫進行事曆。",notifyOk:d=>`已設定，${d} 早上 9 點會通知你。`,calOk:"已加入 iPhone 行事曆，提醒也設好了。",denied:"需要你允許權限才能設定，可以到 iPhone 的「設定」裡開啟。",
+  count:n=>`共 ${n} 個市集`,reset:"清除篩選",empty:"沒有符合條件的市集，試著放寬篩選。",
+  wk:["日","一","二","三","四","五","六"],wkMon:["一","二","三","四","五","六","日"],
+  evDl:n=>`【報名截止】${n}`,evStart:n=>`【市集】${n}`,evOpen:n=>`【開放報名】${n}`,evRemind:(n,b,d)=>`提醒：${n}（${b} ${d}）`,
+  bDl:"報名截止",bStart:"市集開始",bOpen:"開放報名",
+  calTitle:(y,m)=>`${y} 年 ${m} 月`,dayTitle:d=>`${d.getMonth()+1} 月 ${d.getDate()} 日`,dayNone:"這天沒有市集或截止日。",tapDay:"點日期看當天的市集。",
+  calDl:"報名截止",calOpen:"開放報名",calFavOnly:"只看收藏",
+  ig:"IG",ex:{foreignChip:"海外品牌可報名",fyes:"海外可報名",funk:"海外規定未確認",overseas:"海外品牌",open:"報名中",opening:"即將開放（依往年推估）",unknown:"報名時間未公布",closed:"今年已截止",timing:"通常報名時間",dates:"展期",fee:"攤位費",visit:"參展資訊"},orgPick:"精選主辦方",orgGov:"政府與公部門的固定招募",openNow:n=>`目前有 ${n} 場招募中`,visit:"官方報名管道",
+  updated:`資料更新：${UPDATED}`,
+  foot:"資料整理自主辦方公告與市集資訊平台。報名條件、費用與截止日可能變動，請以主辦方表單為準。收藏只存在你自己的瀏覽器。"},
+ en:{search:"Search market, organizer or city…",region:"Region",cat:"Category",status:"Status",month:"Month",all:"All",monthAll:"All months",
+  regions:{north:"North",central:"Central",south:"South",east:"East"},
+  cats:{handmade:"Handmade",design:"Design goods",food:"Food",drink:"Drinks",apparel:"Apparel",accessories:"Accessories",kids:"Kids",pets:"Pets",plants:"Plants",secondhand:"Secondhand",farm:"Farm produce",art:"Illustration & art"},
+  st:{active:"Open or opening soon",closing:"Closing soon",upcoming:"Not open yet",closed:"Closed"},
+  quick:{pick:"Top organizers",gov:"Government",weekend:"This weekend",closing:"Closes within 7 days",cheap:"Low fee (≤ NT$1,000/day)",mrt:"Near MRT / LRT",fav:"Saved"},
+  pill:{open:"Open",tbd:"Open",closing:d=>d===0?"Closes today":`Closes in ${d} days`,upcoming:d=>`Opens ${d}`,closed:"Closed",ended:"Ended",pick:"Top pick",juried:"Juried"},
+  fee:"Stall fee",when:"Hours",dl:"Deadline",dlNone:"Not announced. Check the form.",opensOn:"Applications open",openNow2:"Open now. Apply early",
+  apply:"Apply",remind:"Set reminder",close:"Hide reminder",src:"Source",fav:"Save",unfav:"Remove from saved",
+  base:"Remind me",baseOpen:"before applications open",baseDl:"before the deadline",baseStart:"before the market starts",before:"",days:"days",
+  res:(d,w)=>`You'll be reminded at 9am on ${w}, ${d}`,past:"That date has passed. Pick fewer days.",
+  ics:"Add to iPhone / Outlook calendar",gcal:"Add to Google Calendar",
+  icsHint:"On iPhone, open the downloaded file and tap Add to Calendar. The reminder comes with it.",
+  icsNo:"This preview can't download calendar files. Use Google Calendar for now.",icsSaved:"Downloaded. Open the file to add it to your calendar.",icsDeclined:"Download cancelled.",
+  gHint:"Google Calendar creates an event on the reminder day with your default notification.",notify:"Notify me",report:"Wrong info? Tell us",fb:"Report an error / suggest a market",more:"Details",less:"Hide",openShort:"Open now",buddyAsk:"Want a reminder? I'll tell you when it's time to apply!",buddyDone:"All set! I'll tell you when it's time to apply.",icsNative:"Add to iPhone Calendar",nativeHint:"Notify me sends a notification at 9am on the reminder day. Add to iPhone Calendar saves the event with its reminder.",notifyOk:d=>`Done. You will get a notification at 9am on ${d}.`,calOk:"Added to your iPhone Calendar with the reminder.",denied:"Permission is needed. You can turn it on in iPhone Settings.",
+  count:n=>`${n} markets`,reset:"Clear filters",empty:"No markets match. Try fewer filters.",
+  wk:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],wkMon:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+  evDl:n=>`Application deadline: ${n}`,evStart:n=>`Market: ${n}`,evOpen:n=>`Applications open: ${n}`,evRemind:(n,b,d)=>`Reminder: ${n} (${b} ${d})`,
+  bDl:"deadline",bStart:"starts",bOpen:"opens",
+  calTitle:(y,m)=>new Date(y,m-1,1).toLocaleDateString("en",{month:"long",year:"numeric"}),dayTitle:d=>d.toLocaleDateString("en",{weekday:"short",month:"short",day:"numeric"}),dayNone:"No markets or deadlines on this day.",tapDay:"Tap a date to see its markets.",
+  calDl:"Deadline",calOpen:"Opens",calFavOnly:"Saved only",
+  ig:"IG",ex:{foreignChip:"Open to overseas brands",fyes:"Overseas OK",funk:"Overseas rules unconfirmed",overseas:"Overseas brands",open:"Applications open",opening:"Opening soon (based on past years)",unknown:"Timing not announced",closed:"Closed for this year",timing:"Usual application window",dates:"Dates",fee:"Booth fee",visit:"Exhibitor info"},orgPick:"Top organizers",orgGov:"Recurring government programs",openNow:n=>`${n} open call${n>1?"s":""} now`,visit:"Official sign-up page",
+  updated:`Updated ${UPDATED}`,
+  foot:"Compiled from organizer announcements and market listing sites. Rules, fees and deadlines can change; the organizer's form is the final word. Saved markets stay in your own browser."}
+};
+
+/* ---------- state ---------- */
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let lang = store.get("mh-lang", ((navigator.language||"").toLowerCase().startsWith("zh")?"zh":"en"));
+let favs = new Set(store.get("mh-favs",[]));
+const VISIT = (()=>{ const t=new Date(), d=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,"0")}-${String(t.getDate()).padStart(2,"0")}`; const v=store.get("mh-visit",null)||{cur:null,prev:null}; if(v.cur!==d){ v.prev=v.cur; v.cur=d; store.set("mh-visit",v);} return v; })();
+const PREV_VISIT = VISIT.prev;
+const ADDED_DEFAULT = "2026-10-26";
+const isNew = m => !!PREV_VISIT && (m.added||ADDED_DEFAULT) > PREV_VISIT;
+const F = {q:"",region:"all",cat:"all",status:"active",month:"all",quick:new Set()};
+const openRemind = new Set();
+let view = "list", calMonth = null, calDay = null, calFav = false;
+const inArtifact = !!(window.claude && window.claude.use);
+const isNative = !!(window.__NATIVE_APP__ && window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.native);
+const nativeCbs = {}; window.__nativeReply = (id, ok, msg) => { const f = nativeCbs[id]; if (f) { delete nativeCbs[id]; f(ok, msg); } };
+function callNative(payload){ return new Promise(res=>{ const id="c"+Date.now()+Math.random().toString(36).slice(2); nativeCbs[id]=(ok,msg)=>res({ok,msg}); try{ window.webkit.messageHandlers.native.postMessage(Object.assign({},payload,{cb:id})); }catch(e){ delete nativeCbs[id]; res({ok:false,msg:String(e)}); } }); }
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const pd = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
+const today = () => { const n = new Date(); return new Date(n.getFullYear(),n.getMonth(),n.getDate()); };
+const dayDiff = (a,b) => Math.round((a-b)/86400000);
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const ymd = d => iso(d).replace(/-/g,"");
+const md = d => `${d.getMonth()+1}/${d.getDate()}`;
+const addDays = (d,n) => new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const segs = m => m.segs || [[m.start,m.end]];
+const onDay = (m,ds) => segs(m).some(([a,b])=>ds>=a&&ds<=b);
+const fmtDate = d => lang==="zh"?`${d.getFullYear()}/${md(d)}`:d.toLocaleDateString("en",{month:"short",day:"numeric",year:"numeric"});
+
+function status(m){
+  const t = today();
+  if (pd(m.end) < t) return {k:"ended",g:"closed"};
+  if (m.opens && pd(m.opens) > t) return {k:"upcoming",g:"upcoming"};
+  if (m.deadline){
+    const left = dayDiff(pd(m.deadline),t);
+    if (left < 0) return {k:"closed",g:"closed"};
+    if (left <= 7) return {k:"closing",g:"closing",left};
+    return {k:"open",g:"active"};
+  }
+  return {k:"tbd",g:"active"};
+}
+function months(m){ const out=new Set(); segs(m).forEach(([a,b])=>{let d=pd(a);d=new Date(d.getFullYear(),d.getMonth(),1);const e=pd(b);
+  while(d<=e){out.add(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`);d=new Date(d.getFullYear(),d.getMonth()+1,1);}}); return [...out]; }
+function thisWeekend(m){ const t=today(); const dow=t.getDay(); const sat=addDays(t,(6-dow+7)%7); const sun=dow===0?t:addDays(sat,1);
+  for(let d=dow===0?t:sat; d<=sun; d=addDays(d,1)) if(onDay(m,iso(d))) return true; return false; }
+
+/* ---------- list ---------- */
+function opts(sel, pairs, val){ sel.innerHTML = pairs.map(([v,l])=>`<option value="${v}">${esc(l)}</option>`).join(""); sel.value=val; }
+function renderFilters(){
+  const L=T[lang];
+  $("#q").placeholder=L.search; $("#q").value=F.q;
+  $("#l-region").textContent=L.region; $("#l-cat").textContent=L.cat; $("#l-status").textContent=L.status; $("#l-month").textContent=L.month;
+  opts($("#f-region"),[["all",L.all],...Object.entries(L.regions)],F.region);
+  opts($("#f-cat"),[["all",L.all],...Object.entries(L.cats).filter(([k])=>MARKETS.some(m=>m.cats.includes(k)))],F.cat);
+  opts($("#f-status"),[["all",L.all],...Object.entries(L.st)],F.status);
+  const ms=[...new Set(MARKETS.flatMap(months))].sort();
+  opts($("#f-month"),[["all",L.monthAll],...ms.map(m=>{const [y,mo]=m.split("-");return [m,L.calTitle(+y,+mo)]})],F.month);
+  $("#quick").innerHTML = Object.entries(L.quick).map(([k,l])=>`<button type="button" class="chip" data-quick="${k}" aria-pressed="${F.quick.has(k)}">${k==="fav"?"♥ ":""}${esc(l)}${k==="fav"&&favs.size?` (${favs.size})`:""}</button>`).join("");
+  $("#reset").textContent=L.reset;
+}
+function filtered(){
+  const q=F.q.trim().toLowerCase();
+  return MARKETS.filter(m=>{
+    const s=status(m);
+    if(F.region!=="all"&&m.region!==F.region) return false;
+    if(F.cat!=="all"&&!m.cats.includes(F.cat)) return false;
+    if(F.status!=="all"){ if(F.status==="active"){ if(!(s.g==="active"||s.g==="closing"||s.g==="upcoming")) return false; } else if(s.g!==F.status) return false; }
+    if(F.month!=="all"&&!months(m).includes(F.month)) return false;
+    if(F.quick.has("pick")&&!m.pick) return false;
+    if(F.quick.has("gov")&&!m.gov) return false;
+    if(F.quick.has("weekend")&&!thisWeekend(m)) return false;
+    if(F.quick.has("closing")&&s.k!=="closing") return false;
+    if(F.quick.has("cheap")&&!(m.fee!=null&&m.fee<=1000)) return false;
+    if(F.quick.has("mrt")&&!m.mrt) return false;
+    if(F.quick.has("fav")&&!favs.has(m.id)) return false;
+    if(q){ const hay=[m.zh.name,m.en.name,m.zh.city,m.en.city,m.zh.venue,m.en.venue,m.org.zh,m.org.en,(m.gov||{}).zh||"",(m.gov||{}).en||""].join(" ").toLowerCase(); if(!hay.includes(q)) return false; }
+    return true;
+  }).sort((a,b)=>{ const ka=a.deadline||a.opens||a.start, kb=b.deadline||b.opens||b.start; return (b.pick?1:0)-(a.pick?1:0) || ka.localeCompare(kb); });
+}
+function pillFor(m){
+  const L=T[lang], s=status(m);
+  const txt = s.k==="closing"?L.pill.closing(s.left):s.k==="upcoming"?L.pill.upcoming(fmtDate(pd(m.opens))):L.pill[s.k];
+  const cls = {open:"s-open",tbd:"s-tbd",closing:"s-closing",upcoming:"s-upcoming",closed:"s-closed",ended:"s-closed"}[s.k];
+  return `<span class="pill ${cls}">${esc(txt)}</span>`;
+}
+function remindPanel(m){
+  const L=T[lang]; const t=today();
+  const bases=[]; if(m.opens&&pd(m.opens)>=t) bases.push(["open",L.baseOpen]); if(m.deadline&&pd(m.deadline)>=t) bases.push(["dl",L.baseDl]); bases.push(["start",L.baseStart]);
+  return `<div class="remind" id="r-${m.id}">
+    <div class="row">
+      <label for="rb-${m.id}">${L.base}</label>
+      <select id="rb-${m.id}" data-r="${m.id}">${bases.map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}</select>
+      <span>${L.before}</span>
+      <input type="number" id="rn-${m.id}" data-r="${m.id}" min="0" max="60" value="3" inputmode="numeric" aria-label="${L.days}">
+      <span>${L.days}</span>
+    </div>
+    <div class="row">${[1,3,7,14].map(n=>`<button type="button" class="chip" data-preset="${n}" data-r="${m.id}">${n} ${lang==="en"&&n===1?"day":L.days}</button>`).join("")}</div>
+    <div class="rbuddy"><canvas id="rc-${m.id}" width="22" height="22" aria-hidden="true"></canvas><div class="rsay" id="rs-${m.id}">${L.buddyAsk}</div></div>
+    <div class="result" id="rr-${m.id}"></div>
+    <div class="row">
+      ${isNative?`<button type="button" class="btn primary" data-notify="${m.id}">${L.notify}</button>`:""}
+      <button type="button" class="btn ${isNative?"ghost":"primary"}" data-ics="${m.id}">${isNative?L.icsNative:L.ics}</button>
+      ${isNative?"":`<a class="btn ghost" id="rg-${m.id}" href="#" target="_blank" rel="noopener">${L.gcal}</a>`}
+    </div>
+    <div class="hint" id="rh-${m.id}">${isNative?L.nativeHint:(inArtifact?L.icsNo:L.icsHint)+" "+L.gHint}</div>
+  </div>`;
+}
+const expanded=new Set();
+document.addEventListener("click",e=>{ if(e.target.closest("button,a,input,select,label")) return; const c=e.target.closest(".ticket.mini[data-card]"); if(!c) return; expanded.add(c.dataset.card); renderList(); });
+function card(m){
+  const L=T[lang], x=m[lang], s=status(m), sd=pd(m.start), ed=pd(m.end), C=lang==="zh"?"：":": ";
+  const mon = lang==="zh"?`${sd.getMonth()+1} 月`:sd.toLocaleDateString("en",{month:"short"}).toUpperCase();
+  const to = m.start!==m.end?`${lang==="zh"?"至":"to"} ${md(ed)}`:"";
+  const dl = m.deadline?fmtDate(pd(m.deadline)):L.dlNone;
+  const ended = s.g==="closed"; const fav=favs.has(m.id); const open=expanded.has(m.id)||openRemind.has(m.id);
+  const opensTxt = m.opens&&pd(m.opens)>today()?`${fmtDate(pd(m.opens))}（${L.wk[pd(m.opens).getDay()]}）`:L.openShort;
+  const head = `<div class="top"><button type="button" class="cardhit" data-expand="${m.id}" aria-expanded="${open}"><h2 class="name">${isNew(m)?`<span class="newtag">NEW</span>`:""}${esc(x.name)}</h2><div class="org">${esc(x.city)}・${esc(m.org[lang])}</div></button>
+      <button type="button" class="fav" data-fav="${m.id}" aria-pressed="${fav}" aria-label="${fav?L.unfav:L.fav}" title="${fav?L.unfav:L.fav}">${fav?"♥":"♡"}</button></div>
+    <div class="orow"><div class="opens compact">${L.opensOn}${C}<b>${opensTxt}</b></div>${s.k==="closing"||s.g==="closed"?pillFor(m):""}${m.pick?`<span class="pill s-pick">${L.pill.pick}</span>`:""}${m.gov?`<span class="pill s-gov">${esc(m.gov[lang])}</span>`:""}${open?"":`<span class="chev" aria-hidden="true">▾</span>`}</div>`;
+  const detail = open?`
+    <div class="meta">
+      <span>${esc(x.venue)}</span>
+      <span>${L.when}${C}<b>${esc(x.sched)}</b></span>
+      <span>${L.fee}${C}<b>${esc(x.fee)}</b></span>
+      ${m.deadline?`<span class="dlsmall">${L.dl}${C}${esc(dl)}</span>`:""}
+    </div>
+    <div class="types">${m.juried?`<span class="type">${L.pill.juried}</span>`:""}${m.cats.map(t=>`<span class="type">${L.cats[t]}</span>`).join("")}<span class="type">${L.regions[m.region]}</span></div>
+    ${x.note?`<div class="note">${esc(x.note)}</div>`:""}
+    ${ended?"":`<div class="actions">
+      <a class="btn primary" href="${esc(m.apply)}" target="_blank" rel="noopener">${L.apply} ↗</a>
+      <button type="button" class="btn ghost" data-toggle="${m.id}" aria-expanded="${openRemind.has(m.id)}">${openRemind.has(m.id)?L.close:L.remind}</button>
+    </div>
+    <a class="formhelp en" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">Form in Chinese? Get help ↗</a>
+    <div class="applynote"><span class="zh">送出報名不代表錄取，結果以主辦方通知為準。</span><span class="en">Applying doesn't guarantee a spot. The organizer decides and will let you know.</span></div>
+    ${openRemind.has(m.id)?remindPanel(m):""}`}
+    <div class="src">${L.src}${C}<a href="${esc(m.source)}" target="_blank" rel="noopener">${esc(new URL(m.source).hostname)}</a>・<a href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">${L.report}</a></div>
+    <button type="button" class="morebtn" data-expand="${m.id}">${L.less} ▴</button>`
+    : "";
+  return `<article class="ticket${open?"":" mini"}" data-card="${m.id}">
+   <div class="when"><span class="m">${mon}</span><span class="d">${sd.getDate()}</span><span class="to">${to}</span></div>
+   <div class="body">${head}${detail}</div></article>`;
+}
+function renderList(){
+  const L=T[lang]; renderFilters(); const list=filtered();
+  $("#count").textContent=L.count(list.length);
+  $("#list").innerHTML = list.length?list.map(card).join(""):`<div class="empty">${L.empty}</div>`;
+  openRemind.forEach(id=>{ const m=MARKETS.find(x=>x.id===id); if(m&&$("#r-"+id)){ updateRemind(m); drawPet("ok",$("#rc-"+id)); } });
+}
+
+/* ---------- reminders ---------- */
+function calc(m){
+  const base=($("#rb-"+m.id)||{}).value||"start";
+  let n=parseInt(($("#rn-"+m.id)||{}).value,10); if(isNaN(n)||n<0) n=0; if(n>60) n=60;
+  const baseDate=pd(base==="dl"?m.deadline:base==="open"?m.opens:m.start);
+  const rem=addDays(baseDate,-n);
+  return {base,n,baseDate,rem,past:rem<today()};
+}
+function updateRemind(m){
+  const L=T[lang]; const c=calc(m); const r=$("#rr-"+m.id); if(!r) return;
+  if(c.past){ r.textContent=L.past; r.className="result bad"; }
+  else { r.textContent=L.res(lang==="zh"?`${c.rem.getFullYear()}/${md(c.rem)}`:c.rem.toLocaleDateString("en",{month:"short",day:"numeric"}), L.wk[c.rem.getDay()]); r.className="result"; }
+  const bWord=c.base==="dl"?L.bDl:c.base==="open"?L.bOpen:L.bStart;
+  const title=L.evRemind(m[lang].name,bWord,md(c.baseDate));
+  const details=`${m[lang].sched}\n${m[lang].venue}\n${L.apply}: ${m.apply}`;
+  const g=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${ymd(c.rem)}/${ymd(addDays(c.rem,1))}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(m[lang].venue)}`;
+  const a=$("#rg-"+m.id); if(a){ a.href=g; a.toggleAttribute("aria-disabled",c.past); a.style.opacity=c.past?.5:1; }
+  $$(`[data-preset][data-r="${m.id}"]`).forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.preset===c.n)));
+}
+function buildIcs(m){
+  const L=T[lang]; const c=calc(m); const name=m[lang].name;
+  const single=c.base!=="start";
+  const s=c.baseDate; const e=single?addDays(s,1):addDays(pd(m.end),1);
+  const sum=c.base==="dl"?L.evDl(name):c.base==="open"?L.evOpen(name):L.evStart(name);
+  const hours=c.n*24-9; const trig=hours>0?`-PT${hours}H`:`PT${-hours}H`;
+  const fold=t=>t.replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");
+  const desc=`${m[lang].sched}\n${L.fee}: ${m[lang].fee}\n${L.apply}: ${m.apply}`;
+  const stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
+  return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Taiwan Market Hub//TW","CALSCALE:GREGORIAN","BEGIN:VEVENT",
+   `UID:${m.id}-${c.base}-${Date.now()}@market-hub`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${ymd(s)}`,`DTEND;VALUE=DATE:${ymd(e)}`,
+   `SUMMARY:${fold(sum)}`,`LOCATION:${fold(m[lang].venue)}`,`DESCRIPTION:${fold(desc)}`,`URL:${m.apply}`,
+   "BEGIN:VALARM","ACTION:DISPLAY",`DESCRIPTION:${fold(sum)}`,`TRIGGER:${trig}`,"END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+}
+async function saveIcs(m){
+  const L=T[lang], c=calc(m), h=$("#rh-"+m.id); if(c.past) return;
+  if(isNative){
+    const single=c.base!=="start", name=m[lang].name;
+    const sum=c.base==="dl"?L.evDl(name):c.base==="open"?L.evOpen(name):L.evStart(name);
+    const r=await callNative({action:"calendar",title:sum,start:iso(c.baseDate),end:iso(single?c.baseDate:pd(m.end)),location:m[lang].venue,notes:`${m[lang].sched}\n${L.fee}: ${m[lang].fee}\n${L.apply}: ${m.apply}`,url:m.apply,alarmMinutes:(c.n*24-9)*60});
+    h.textContent = r.ok?L.calOk:L.denied; h.className = r.ok?"hint result":"hint result bad"; if(r.ok) buddyCheer(m); return;
+  }
+  const data=buildIcs(m), filename=`${m.id}-${c.base}.ics`;
+  if(inArtifact){ h.textContent=L.icsNo; h.className="hint result bad"; return; }
+  const url=URL.createObjectURL(new Blob([data],{type:"text/calendar;charset=utf-8"}));
+  const a=document.createElement("a"); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000); h.textContent=L.icsSaved; h.className="hint";
+}
+
+async function notifyMe(m){
+  const L=T[lang], c=calc(m), h=$("#rh-"+m.id); if(c.past) return;
+  const bWord=c.base==="dl"?L.bDl:c.base==="open"?L.bOpen:L.bStart;
+  const r=await callNative({action:"notify",id:`${m.id}-${c.base}`,date:iso(c.rem),title:L.evRemind(m[lang].name,bWord,md(c.baseDate)),body:`${m[lang].city}・${m[lang].venue}`});
+  h.textContent = r.ok?L.notifyOk(fmtDate(c.rem)):L.denied; h.className = r.ok?"hint result":"hint result bad"; if(r.ok) buddyCheer(m);
+}
+/* ---------- calendar ---------- */
+function calMonths(){ return [...new Set(MARKETS.flatMap(m=>[...months(m),...[m.deadline,m.opens].filter(Boolean).map(d=>d.slice(0,7))]))].sort(); }
+function renderCalendar(){
+  const L=T[lang]; const ms=calMonths(); const nowM=iso(today()).slice(0,7);
+  if(!calMonth) calMonth = ms.find(x=>x>=nowM) || ms[0];
+  const [y,mo]=calMonth.split("-").map(Number);
+  $("#cal-title").textContent=L.calTitle(y,mo);
+  $("#cal-prev").disabled = calMonth<=ms[0]; $("#cal-next").disabled = calMonth>=ms[ms.length-1];
+  $("#cal-favnote").innerHTML=`<button type="button" class="chip" id="cal-fav" aria-pressed="${calFav}">♥ ${L.calFavOnly}</button>`;
+  const pool = calFav?MARKETS.filter(m=>favs.has(m.id)):MARKETS;
+  const first=new Date(y,mo-1,1), lead=(first.getDay()+6)%7, n=new Date(y,mo,0).getDate(), tISO=iso(today());
+  let h=L.wkMon.map(w=>`<div class="wd">${w}</div>`).join("") + Array(lead).fill('<div class="day blank"></div>').join("");
+  for(let d=1; d<=n; d++){
+    const ds=`${calMonth}-${String(d).padStart(2,"0")}`;
+    const mk=pool.filter(m=>onDay(m,ds)).length, dl=pool.filter(m=>m.deadline===ds||m.opens===ds).length;
+    h+=`<button type="button" class="day${ds===tISO?" today":""}" data-day="${ds}" aria-pressed="${calDay===ds}"><span class="n">${d}</span><span class="c">${mk?`<span><i class="dot mk"></i>${mk}</span>`:""}${dl?`<span><i class="dot dl"></i>${dl}</span>`:""}</span></button>`;
+  }
+  $("#cal-grid").innerHTML=h;
+  const dlEl=$("#daylist");
+  if(!calDay||calDay.slice(0,7)!==calMonth){ dlEl.innerHTML=`<p class="hint">${L.tapDay}</p>`; return; }
+  const on=pool.filter(m=>onDay(m,calDay)), dls=pool.filter(m=>m.deadline===calDay), ops=pool.filter(m=>m.opens===calDay);
+  const item=(m,tag)=>`<div class="ocard"><div class="pills">${tag?`<span class="pill s-closing">${tag}</span>`:""}${pillFor(m)}</div><h3>${esc(m[lang].name)}</h3><p>${esc(m[lang].city)}・${esc(m[lang].venue)}</p><div class="actions"><a class="btn primary small" href="${esc(m.apply)}" target="_blank" rel="noopener">${L.apply} ↗</a></div></div>`;
+  dlEl.innerHTML=`<h3>${L.dayTitle(pd(calDay))}</h3>`+((on.length||dls.length||ops.length)?`<div class="list">${dls.map(m=>item(m,L.calDl)).join("")}${ops.map(m=>item(m,L.calOpen)).join("")}${on.map(m=>item(m,"")).join("")}</div>`:`<p class="hint">${L.dayNone}</p>`);
+}
+
+
+const EXPOS = [
+ {id:"ff48",foreign:"yes",fzh:"官網有日本社團的報名規定頁，日本也有代理受付窗口；其他國家的海外社團規定請洽 circle@f-2.com.tw。",fen:"There is a rules page for Japanese circles and a proxy desk in Japan; other overseas circles should ask circle@f-2.com.tw.",status:"open",region:"north",start:"2027-02-19",end:"2027-02-21",deadline:"2026-11-09",cats:["art","design","handmade","accessories"],
+  zh:{name:"開拓動漫祭 FF48",org:"開拓動漫",venue:"台北・花博公園爭艷館",sched:"2027/2/19–21",fee:"未公開（三天場費用加倍）",note:"同人、原創創作者的社團攤位。報名到 11/9 晚上 11:59，要同時完成繳費；11/23 公告結果，額滿抽選。"},
+  en:{name:"Fancy Frontier 48",org:"Fancy Frontier",venue:"Taipei Expo Dome",sched:"Feb 19–21, 2027",fee:"Not published (3-day booths pay double)",note:"Circle booths for doujin and original creators. Apply and pay by Nov 9, 23:59; results Nov 23; lottery if full."},
+  apply:"https://circle.f-2.com.tw/login",source:"https://www.f-2.com.tw/%e3%80%90ff48%e3%80%91%e7%a4%be%e5%9c%98%e5%a0%b1%e5%90%8d%e9%96%8b%e5%a7%8b%ef%bc%81/"},
+ {id:"cet2027",foreign:"yes",fzh:"外國公司可以直接上官網報名，或透過台灣代理商、分公司報名；代表外國品牌要附授權書。2026 年外國廠商價格（每 6㎡、含稅）：空地 US$960 起、標準攤 US$1,430 起。新銳品牌區只限中華民國國籍。",fen:"Foreign companies can apply online directly or via a Taiwan agent or branch; brand representatives need an authorization letter. 2026 foreign rates (per 6 m², tax incl.): raw space from US$960, standard booth from US$1,430. The Emerging Brands zone is ROC nationals only.",status:"opening",region:"north",start:null,end:null,deadline:null,cats:["design","handmade","accessories","art","kids","apparel"],pick:true,
+  zh:{name:"2027 臺灣文博會",org:"文化部／台灣設計研究院",venue:"台北（2026 年在南港展覽館一館，2027 年未公布）",sched:"預計 2027 年 8 月上旬（2025、2026 年都在 8 月初）",fee:"2026 年參考：新銳品牌 3×1.5m 9,600 元（限 100 家）；標準攤位 3×2m 42,000 元（早鳥 36,720 元）",timing:"往年 1–3 月開放徵展，3/20 早鳥截止、3/31 截止，5 月初公布入選",note:"審查制，2026 年 912 家報名、錄取 332 家。新銳品牌區要成立未滿 3 年、負責人為中華民國國籍並完成登記；外國公司可報一般展區。"},
+  en:{name:"Creative Expo Taiwan 2027",org:"Ministry of Culture / Taiwan Design Research Institute",venue:"Taipei (2026: Nangang Exhibition Center Hall 1; 2027 TBA)",sched:"Likely early August 2027",fee:"2026 ref: new-brand 3×1.5m NT$9,600 (100 slots); standard 3×2m NT$42,000 (early-bird NT$36,720)",timing:"Calls usually open Jan–Mar; early-bird Mar 20, deadline Mar 31, results early May",note:"Juried: 912 applied, 332 selected in 2026. New-brand zone needs a business under 3 years old with an ROC-national representative; foreign companies can apply to the regular zone."},
+  apply:"https://exhib.creativexpo-register.com",source:"https://announce.yzu.edu.tw/files/hs/20260316152352A09000000E_1152200755_senddoc1_Attach2.pdf"},
+ {id:"dg2027",foreign:"yes",fzh:"Creator 50 Lab 國內外創作者都能報，2024 年優惠價 US$500，有英文介紹頁。一般攤位是外貿協會主辦的國際展。",fen:"Creator 50 Lab is open to domestic and international creators (US$500 in 2024) with an English info page. Regular booths are TAITRA international trade-show booths.",status:"unknown",region:"north",start:"2027-04-15",end:"2027-04-18",deadline:null,cats:["design","accessories","art","kids","handmade"],pick:true,
+  zh:{name:"2027 台灣創意禮品文具展 DG Taiwan",org:"外貿協會",venue:"台北世貿一館",sched:"2027/4/15–18",fee:"Creator 50 Lab：US$500（2024 年）；一般攤位代理商報價 9㎡ 25,800（未經主辦確認）",timing:"新銳創作者區「Creator 50 Lab」往年報名到前一年 12/31 或額滿為止",note:"Creator 50 Lab 限 50 個名額，台灣和海外創作者都能報，要是原創作品、5 年內的新品牌。2027 年是否續辦還沒確認。"},
+  en:{name:"DG Taiwan 2027 (Designed Giftionery)",org:"TAITRA",venue:"Taipei World Trade Center Hall 1",sched:"Apr 15–18, 2027",fee:"Creator 50 Lab: US$500 (2024); regular booth agent quote 9 m² 25,800 (unconfirmed)",timing:"The 'Creator 50 Lab' zone has taken applications until Dec 31 of the prior year or until full",note:"Creator 50 Lab: 50 slots, Taiwan and overseas creators, original work, brands under 5 years. 2027 continuation unconfirmed."},
+  apply:"https://www.giftionery.net/",source:"https://en.jufair.com/exhibition/11769/"},
+ {id:"tce2027",foreign:"unknown",fzh:"2026 年有異國美食區，但外國業者能否直接報名未確認。要在台灣賣食品，需要台灣進口商辦理輸入查驗。",fen:"There was a foreign-cuisine zone in 2026, but direct foreign applications are unconfirmed. Selling food in Taiwan needs a Taiwan importer for import inspection.",status:"opening",region:"north",start:"2027-07-30",end:"2027-08-02",deadline:null,cats:["food","drink","farm"],
+  zh:{name:"2027 台灣美食展",org:"台灣觀光協會",venue:"台北世貿一館",sched:"2027/7/30–8/2",fee:"請見參展簡章",timing:"往年 1 月開放報名（2025 年 1/7、2026 年 1/12），早鳥到 5 月中",note:"2026 年約 13.3 萬人次參觀，也有第一次參展的小品牌。"},
+  en:{name:"Taiwan Culinary Exhibition 2027",org:"Taiwan Visitors Association",venue:"Taipei World Trade Center Hall 1",sched:"Jul 30–Aug 2, 2027",fee:"See exhibitor guidelines",timing:"Usually opens in January; early-bird until mid-May",note:"About 133,000 visitors in 2026, including first-time small brands."},
+  apply:"https://www.tcetva.tw/SaleList",source:"https://www.tcetva.tw/SaleList"},
+ {id:"tica2027",foreign:"unknown",fzh:"主辦有海外推廣頁，但海外參展規定未確認。",fen:"The organizer has an overseas promotion page, but overseas exhibitor rules are unconfirmed.",status:"unknown",region:"north",start:"2027-01-28",end:"2027-02-01",deadline:null,cats:["art","design","kids"],
+  zh:{name:"2027 台北國際動漫節",org:"中華民國動漫畫發展協會",venue:"台北世貿一館",sched:"2027/1/28–2/1",fee:"未公開",note:"以企業和品牌攤位為主，離展期只剩 3 個月，可能已截止。"},
+  en:{name:"Taipei Int'l Comics & Animation Festival 2027",org:"Chinese Comic Promotion Association",venue:"Taipei World Trade Center Hall 1",sched:"Jan 28–Feb 1, 2027",fee:"Not published",note:"Mainly company and brand booths; likely closed with 3 months to go."},
+  apply:"https://www.ccpa.org.tw/tica/",source:"https://ccpa.org.tw/ccpa/data.php?id=2&tpl=1"},
+ {id:"tibe2027",foreign:"yes",fzh:"國際區開放海外出版社線上報名、審查制。主辦不提供簽證邀請函。",fen:"The International Zone takes online applications from non-Taiwanese publishers, subject to review. No visa invitation letters.",status:"closed",region:"north",start:"2027-02-16",end:"2027-02-21",deadline:"2026-09-30",cats:["art","kids","design"],
+  zh:{name:"2027 台北國際書展",org:"台北書展基金會",venue:"台北世貿一館",sched:"2027/2/16–21",fee:"2026 年早鳥參考：淨地 3×3m US$1,700",timing:"每年 8 月底早鳥、9 月底截止，想參加 2028 年要記得明年 8 月報名",note:"線上報名、主辦審核，不接受逾期報名。"},
+  en:{name:"Taipei International Book Exhibition 2027",org:"Taipei Book Fair Foundation",venue:"Taipei World Trade Center Hall 1",sched:"Feb 16–21, 2027",fee:"2026 early-bird ref: space-only 3×3m US$1,700",timing:"Early-bird ends late August, deadline late September. For 2028, apply next August.",note:"Online only, juried, no late entries."},
+  apply:"https://www.tibe.org.tw/en/news_detail/20/198",source:"https://www.tibe.org.tw/en/news_detail/20/198"},
+ {id:"coffee2027",foreign:"unknown",fzh:"英文官網有參展詢問表單，海外價格另計；請洽 CustomerService@chanchao.com.tw。",fen:"The English site has an exhibit inquiry form; overseas rates differ. Contact CustomerService@chanchao.com.tw.",status:"unknown",region:"north",start:"2027-11-12",end:"2027-11-15",deadline:null,cats:["drink","food"],
+  zh:{name:"2027 臺灣國際咖啡展",org:"展昭國際",venue:"台北南港展覽館一館",sched:"2027/11/12–15（與茶博同期）",fee:"2026 年參考：3×3m 隔間攤位 54,075 元（含稅）",note:"台幣價格只適用在台灣登記的公司，額滿為止。"},
+  en:{name:"Taiwan International Coffee Show 2027",org:"Chan Chao",venue:"Nangang Exhibition Center Hall 1",sched:"Nov 12–15, 2027",fee:"2026 ref: 3×3m shell booth NT$54,075 incl. tax",note:"NT$ rates only for Taiwan-registered companies; until full."},
+  apply:"https://www.chanchao.com.tw/coffee/",source:"https://www.chanchao.com.tw/coffee/exhibitor.asp"},
+ {id:"tea2027",foreign:"yes",fzh:"英文頁列有美元價格，海外廠商可直接詢問報名。",fen:"The English page lists USD prices; overseas companies can inquire directly.",status:"unknown",region:"north",start:"2027-11-12",end:"2027-11-15",deadline:null,cats:["drink","food","farm"],
+  zh:{name:"2027 臺灣國際茶業博覽會",org:"展昭國際",venue:"台北南港展覽館一館",sched:"2027/11/12–15",fee:"英文頁（2024 年）：標準攤位 3×3m US$2,400；台幣價請洽主辦",note:"攤位依付款順序分配。"},
+  en:{name:"Taiwan International Tea Expo 2027",org:"Chan Chao",venue:"Nangang Exhibition Center Hall 1",sched:"Nov 12–15, 2027",fee:"EN page (2024): standard 3×3m US$2,400; ask for NT$ rates",note:"Booths allocated by payment order."},
+  apply:"https://chanchao.com.tw/tea/en/exhibitor.asp",source:"https://www.chanchao.com.tw/en/expoPrint.asp?country=TW"},
+ {id:"tc-tea-coffee2027",status:"unknown",region:"central",start:"2027-07-09",end:"2027-07-12",deadline:null,cats:["drink","food"],
+  zh:{name:"2027 台中國際茶、咖啡烘焙展",org:"展昭國際",venue:"台中國際會展中心",sched:"2027/7/9–12",fee:"未公布",note:"有台中十大伴手禮專區，適合中部的食品小品牌。"},
+  en:{name:"Taichung Tea, Coffee & Bakery Show 2027",org:"Chan Chao",venue:"Taichung Int'l Convention & Exhibition Center",sched:"Jul 9–12, 2027",fee:"Not published",note:"Includes a Taichung top-10 souvenirs zone; good for central-Taiwan food brands."},
+  apply:"https://www.chanchao.com.tw/expo.asp",source:"https://www.chanchao.com.tw/en/expoPrint.asp?country=TW"},
+ {id:"kh-tea-coffee2027",status:"unknown",region:"south",start:"2027-08-06",end:"2027-08-09",deadline:null,cats:["drink","food"],
+  zh:{name:"2027 高雄國際茶、咖啡暨食品展",org:"展昭國際",venue:"高雄展覽館",sched:"2027/8/6–9",fee:"2026 年英文頁：淨地 3×3m US$1,500",note:"國內廠商在展前約 3 個月的協調會選位置。"},
+  en:{name:"Kaohsiung Tea, Coffee & Food Show 2027",org:"Chan Chao",venue:"Kaohsiung Exhibition Center",sched:"Aug 6–9, 2027",fee:"2026 EN page: raw 3×3m US$1,500",note:"Local exhibitors pick booth locations about 3 months before."},
+  apply:"https://www.chanchao.com.tw/KTCFS/en/exhibitor.asp",source:"https://www.chanchao.com.tw/KTCFS/en/exhibitor.asp"},
+ {id:"tn-tea-coffee2027",status:"unknown",region:"south",start:"2027-09-03",end:"2027-09-06",deadline:null,cats:["drink","food"],
+  zh:{name:"2027 台南國際茶、咖啡暨食品展",org:"展昭國際",venue:"大臺南會展中心",sched:"2027/9/3–6",fee:"未公布",note:"只確認了日期和場地，參展條件請洽主辦。"},
+  en:{name:"Tainan Tea, Coffee & Food Show 2027",org:"Chan Chao",venue:"ICC Tainan",sched:"Sep 3–6, 2027",fee:"Not published",note:"Only dates and venue confirmed; ask the organizer for terms."},
+  apply:"https://www.chanchao.com.tw/expo.asp",source:"https://www.chanchao.com.tw/en/expoPrint.asp?country=TW"},
+ {id:"pets2027",status:"unknown",region:"north",start:"2027-07-02",end:"2027-07-05",deadline:null,cats:["pets","handmade","food"],
+  zh:{name:"2027 展昭台北寵物用品博覽會",org:"展昭國際",venue:"台北南港展覽館一館",sched:"2027/7/2–5",fee:"未公布",note:"適合寵物手作或零食品牌。同系列還有高雄寵物展 2026/12/11–14、台中寵物展 2027/5/14–17。"},
+  en:{name:"Chan Chao Taipei Pets Show 2027",org:"Chan Chao",venue:"Nangang Exhibition Center Hall 1",sched:"Jul 2–5, 2027",fee:"Not published",note:"For pet handmade and treat brands. Sister shows: Kaohsiung Dec 11–14, 2026; Taichung May 14–17, 2027."},
+  apply:"https://www.chanchao.com.tw/expo.asp",source:"https://www.chanchao.com.tw/en/expoPrint.asp?country=TW"},
+ {id:"cwt75",foreign:"unknown",fzh:"官網沒有海外社團報名資訊，可來信 CWT@comicworld.com.tw 詢問。",fen:"No overseas-circle info on the site; ask CWT@comicworld.com.tw.",status:"unknown",region:"north",start:"2027-02-13",end:"2027-02-14",deadline:null,cats:["art","design","accessories"],
+  zh:{name:"CWT-75 台北場",org:"Comic World Taiwan",venue:"台北",sched:"2027/2/13–14",fee:"未公布",note:"同人、創作者社團攤位。同系列還有 K52 高雄 2027/2/20–21、T37 台中 4/10–11、CWT-76 台北 8/14–15。"},
+  en:{name:"CWT-75 Taipei",org:"Comic World Taiwan",venue:"Taipei",sched:"Feb 13–14, 2027",fee:"Not published",note:"Circle booths for doujin and original creators. Also K52 Kaohsiung Feb 20–21, T37 Taichung Apr 10–11, CWT-76 Taipei Aug 14–15, 2027."},
+  apply:"https://www.comicworld.com.tw/",source:"https://www.comicworld.com.tw/"},
+ {id:"illustration-taipei",foreign:"yes",fzh:"2026 年有日本、韓國、香港的創作者參展；報名方式請看官網 illustrationtaipei.com。",fen:"Creators from Japan, Korea and Hong Kong exhibited in 2026; see illustrationtaipei.com for how to apply.",status:"unknown",region:"north",start:null,end:null,deadline:null,cats:["art","design"],pick:true,
+  zh:{name:"台北國際插畫博覽會",org:"Illustration Taipei",venue:"台北（2026 年在花博爭艷館）",sched:"2027 年未公布（2026 年為 4/2–5）",fee:"未公布",note:"插畫創作者的大型展會。"},
+  en:{name:"Illustration Taipei",org:"Illustration Taipei",venue:"Taipei (2026: Expo Dome)",sched:"2027 TBA (2026: Apr 2–5)",fee:"Not published",note:"A major fair for illustrators."},
+  apply:"https://www.illustrationtaipei.com/",source:"https://www.ctee.com.tw/news/20260323700879-431401"},
+ {id:"ttf",foreign:"unknown",fzh:"沒有公開的招展資訊，請直接詢問主辦。",fen:"No public exhibitor call; contact the organizer.",status:"unknown",region:"north",start:null,end:null,deadline:null,cats:["art","design","kids"],
+  zh:{name:"台北國際玩具創作大展 TTF",org:"台北怪獸國際",venue:"台北（2026 年在華山 1914）",sched:"2027 年未公布（2026 年為 10/8–11）",fee:"未公布",note:"設計師玩具、公仔創作者的大型展。"},
+  en:{name:"Taipei Toy Festival",org:"Taipei Monster International",venue:"Taipei (2026: Huashan 1914)",sched:"2027 TBA (2026: Oct 8–11)",fee:"Not published",note:"Big show for designer toys and figure creators."},
+  apply:"https://www.toy-people.com/?p=115234",source:"https://www.toy-people.com/?p=115234"},
+ {id:"pinkoi-fest",foreign:"unknown",fzh:"曾有香港設計師參展，招募管道未公開，可能只限 Pinkoi 平台上的品牌。",fen:"A Hong Kong designer has exhibited; recruitment isn't public and may be limited to Pinkoi sellers.",status:"unknown",region:"north",start:null,end:null,deadline:null,cats:["design","handmade","accessories","apparel"],
+  zh:{name:"Pinkoi 品品節／瘋設祭",org:"Pinkoi",venue:"台北（2026 年在花博）",sched:"2027 年未公布（2026 年 6 月）",fee:"2026 年約 10,000 元（逾期退出罰 3,500 元）",note:"以 Pinkoi 上的設計品牌為主。"},
+  en:{name:"Pinkoi Pin Pin Fest / Design Fest",org:"Pinkoi",venue:"Taipei (2026: Expo Park)",sched:"2027 TBA (2026: June)",fee:"2026: about NT$10,000 (NT$3,500 late-withdrawal penalty)",note:"Mainly design brands that sell on Pinkoi."},
+  apply:"https://blog.pinkoi.com/tw/news/expo/pinkoi-2026market/",source:"https://www.ctee.com.tw/news/20260613700565-431401"},
+ {id:"foodtaipei2027",foreign:"yes",fzh:"外貿協會主辦的 B2B 展；沒有台灣代理或統編的海外公司，走海外廠商區或國家館。2023 年參考：空地每 9㎡ US$1,550 起。",fen:"TAITRA B2B show. Overseas firms without a Taiwan agent or tax ID go to the Overseas Exhibitor Area or a national pavilion. 2023 ref: raw space from US$1,550 per 9 m².",status:"opening",region:"north",start:"2027-06-23",end:"2027-06-26",deadline:null,cats:["food","drink","farm"],
+  zh:{name:"2027 台北國際食品展 FOOD TAIPEI",org:"外貿協會",venue:"台北南港展覽館",sched:"2027/6/23–26",fee:"2023 年參考：空地每 9㎡ US$1,550 起",timing:"往年前一年 11 月下旬開放報名",note:"以企業對企業（B2B）為主，只有開放民眾的那天可以零售，而且要開發票。"},
+  en:{name:"FOOD TAIPEI 2027",org:"TAITRA",venue:"Taipei Nangang Exhibition Center",sched:"Jun 23–26, 2027",fee:"2023 ref: raw space from US$1,550 per 9 m²",timing:"Usually opens in late November of the prior year",note:"Mainly B2B; retail only on the public day, with invoices."},
+  apply:"https://belize.org/wp-content/uploads/Food_Taipei-Application_Kit.pdf",source:"https://belize.org/wp-content/uploads/Food_Taipei-Application_Kit.pdf"},
+];
+let expoF="all";
+function renderExpos(){
+  const L=T[lang], C=lang==="zh"?"：":": ";
+  const lab={open:L.ex.open,opening:L.ex.opening,unknown:L.ex.unknown,closed:L.ex.closed};
+  const cls={open:"s-open",opening:"s-tbd",unknown:"s-upcoming",closed:"s-closed"};
+  $("#expo-filter").innerHTML=[["all",L.all],["foreign",L.ex.foreignChip],["open",L.ex.open],["opening",L.ex.opening],["unknown",L.ex.unknown],["closed",L.ex.closed]].map(([v,l])=>`<button type="button" class="chip" data-expof="${v}" aria-pressed="${expoF===v}">${esc(l)}</button>`).join("");
+  const order={open:0,opening:1,unknown:2,closed:3};
+  const list=EXPOS.filter(e=>expoF==="all"||(expoF==="foreign"?e.foreign==="yes":e.status===expoF)).sort((a,b)=>order[a.status]-order[b.status]||(a.start||"9").localeCompare(b.start||"9"));
+  $("#expo-list").innerHTML=list.map(e=>{const x=e[lang]; const sd=e.start?pd(e.start):null;
+    const mon=sd?(lang==="zh"?`${sd.getFullYear()}<br>${sd.getMonth()+1} 月`:`${sd.getFullYear()}<br>${sd.toLocaleDateString("en",{month:"short"}).toUpperCase()}`):"TBA";
+    const g=e.deadline&&pd(e.deadline)>=today()?`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent((lang==="zh"?"【展會報名截止】":"Expo deadline: ")+x.name)}&dates=${ymd(pd(e.deadline))}/${ymd(addDays(pd(e.deadline),1))}&details=${encodeURIComponent(e.apply)}`:"";
+    return `<article class="ticket"><div class="when"><span class="m">${mon}</span><span class="d">${sd?sd.getDate():"–"}</span></div><div class="body">
+      <div class="top"><div style="min-width:0"><h2 class="name">${esc(x.name)}</h2><div class="org">${esc(x.org)}</div></div></div>
+      <div class="pills"><span class="pill ${cls[e.status]}">${lab[e.status]}</span>${e.pick?`<span class="pill s-pick">${L.pill.pick}</span>`:""}${e.foreign==="yes"?`<span class="pill s-gov">${L.ex.fyes}</span>`:e.foreign==="unknown"?`<span class="pill s-upcoming">${L.ex.funk}</span>`:""}</div>
+      ${e.deadline&&e.status==="open"?`<div class="opens">${L.dl}${C}<b>${fmtDate(pd(e.deadline))}</b></div>`:""}
+      ${x.timing?`<div class="opens">${L.ex.timing}${C}<b>${esc(x.timing)}</b></div>`:""}
+      <div class="meta"><span>${esc(x.venue)}</span><span>${L.ex.dates}${C}<b>${esc(x.sched)}</b></span><span>${L.ex.fee}${C}<b>${esc(x.fee)}</b></span></div>
+      <div class="types">${e.cats.map(t=>`<span class="type">${L.cats[t]}</span>`).join("")}<span class="type">${L.regions[e.region]}</span></div>
+      ${x.note?`<div class="note">${esc(x.note)}</div>`:""}
+      ${e.fzh?`<div class="meta"><span>${L.ex.overseas}${C}<b>${esc(lang==="zh"?e.fzh:e.fen)}</b></span></div>`:""}
+      <div class="actions"><a class="btn primary" href="${esc(e.apply)}" target="_blank" rel="noopener">${e.status==="open"?L.apply:L.ex.visit} ↗</a>${g?`<a class="btn ghost" href="${g}" target="_blank" rel="noopener">${L.gcal}</a>`:""}</div>
+      <a class="formhelp en" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">Form in Chinese? Get help ↗</a>
+      <div class="applynote"><span class="zh">送出報名不代表錄取，結果以主辦方通知為準。</span><span class="en">Applying doesn't guarantee a spot. The organizer decides and will let you know.</span></div>
+      <div class="src">${L.src}${C}<a href="${esc(e.source)}" target="_blank" rel="noopener">${esc(new URL(e.source).hostname)}</a></div>
+    </div></article>`;}).join("");
+}
+
+/* ---------- organizers ---------- */
+function renderOrgs(){
+  const L=T[lang];
+  const one=o=>{
+    const openN=MARKETS.filter(m=>(m.org.zh.includes(o.zh)||o.zh.includes(m.org.zh.split("／")[0]))&&["active","closing"].includes(status(m).g)).length;
+    return `<div class="ocard"><h3>${esc(o[lang])}</h3>
+      <div class="h">${o.ig?`@${esc(o.ig)}・`:""}${L.regions[o.region]}</div>
+      <p>${esc(lang==="zh"?o.wzh:o.wen)}</p>
+      ${openN?`<div class="open">● ${L.openNow(openN)}</div>`:""}
+      <div class="actions"><a class="btn ghost small" href="${esc(o.link)}" target="_blank" rel="noopener">${L.visit} ↗</a>${o.ig?`<a class="btn ghost small" href="https://www.instagram.com/${esc(o.ig)}/" target="_blank" rel="noopener">${L.ig} ↗</a>`:""}</div></div>`;
+  };
+  $("#orgs").innerHTML=`<h2 class="ogh">${L.orgPick}</h2>`+ORGS.filter(o=>!o.gov).map(one).join("")+`<h2 class="ogh">${L.orgGov}</h2>`+ORGS.filter(o=>o.gov).map(one).join("");
+}
+function renderGloss(){ $("#gloss tbody").innerHTML=GLOSS.map(([z,e])=>`<tr><td class="k">${esc(z)}</td><td>${esc(e)}</td></tr>`).join(""); }
+
+
+/* ---------- my progress (pixel) ---------- */
+const STEPS={zh:["追蹤","報名","錄取","繳費","出攤"],en:["Saved","Applied","Accepted","Paid","Done"]};
+let prog=store.get("mh-prog",{});
+const LVN={zh:["新手攤主","市集常客","搶位高手","人氣攤主","傳說攤主"],en:["Rookie","Regular","Spot sniper","Crowd favorite","Legend"]};
+function drawPet(mood,cv){
+  const c=cv||$("#pet"); if(!c) return; const x=c.getContext("2d"); x.clearRect(0,0,22,22);
+  const P=(col,px)=>{x.fillStyle=col;px.forEach(([a,b,w=1,h=1])=>x.fillRect(a,b,w,h))};
+  const K="#141414",R="#F44336",W="#FFFFFF",Y="#FFC814",B="#C98A4B",D="#8A5A2B";
+  P(K,[[2,3,18,1],[1,4,1,4],[20,4,1,4],[2,8,18,1]]); for(let i=0;i<6;i++)P(i%2?W:R,[[2+i*3,4,3,4]]);
+  P(K,[[3,9,1,9],[18,9,1,9],[3,13,16,1],[3,19,16,1],[3,13,1,7],[18,13,1,7]]); P(B,[[4,14,14,5]]); P(D,[[4,18,14,1]]);
+  if(mood==="worry"){P(K,[[7,15,2,1],[13,15,2,1],[9,17,4,1],[8,16,1,1],[13,16,1,1]]);P(W,[[7,14,1,1],[14,14,1,1]])}
+  else if(mood==="party"){P(K,[[7,15,2,1],[13,15,2,1],[8,17,6,1],[9,18,4,1]]);P(Y,[[1,1,1,1],[20,1,1,1],[10,0,2,1],[0,11,1,1],[21,11,1,1]])}
+  else P(K,[[8,15,1,1],[13,15,1,1],[9,17,4,1],[8,16,1,1],[13,16,1,1]]);
+  P(Y,[[6,12,2,1]]);P("#2196F3",[[10,11,2,2]]);P("#66BB6A",[[14,12,2,1]]);P(K,[[5,20,3,1],[14,20,3,1]]);
+}
+const dleft=s=>dayDiff(pd(s),today());
+function meter(label,val,left,col){const pct=Math.max(4,Math.min(100,val));return `<div class="meter"><div class="mbar"><i style="width:${pct}%;background:var(${col})"></i><b>${left}</b></div><span>${label}</span></div>`}
+function renderProgress(){
+  const zh=lang==="zh"; const list=MARKETS.filter(m=>favs.has(m.id));
+  const xp=list.reduce((a,m)=>a+(prog[m.id]||0)*25,0), lv=1+Math.floor(xp/100);
+  $("#pxlv").textContent=`Lv.${lv} ${LVN[lang][Math.min(lv-1,4)]}`; $("#pxfill").style.width=(xp%100)+"%"; $("#pxxp").textContent=xp+" XP";
+  if(!list.length){ drawPet("ok"); $("#pxsay").textContent=zh?"先到「招募中」按 ♡ 收藏市集，\n它們就會變成這裡的關卡。":"Tap ♡ on markets in Stall calls\nand they become quests here."; $("#pxlist").innerHTML=""; return; }
+  const urgent=list.map(m=>{const s=prog[m.id]||0; if(m.opens&&dleft(m.opens)>0) return {m,k:zh?"開放報名":"applications open",d:dleft(m.opens)}; if(m.deadline&&dleft(m.deadline)>=0&&s<1) return {m,k:zh?"報名截止":"deadline",d:dleft(m.deadline)}; return null}).filter(Boolean).sort((a,b)=>a.d-b.d)[0];
+  const done=list.filter(m=>(prog[m.id]||0)>=4).length;
+  if(urgent&&urgent.d<=7){drawPet("worry");$("#pxsay").textContent=zh?`${urgent.m.zh.name}\n${urgent.d===0?"今天":urgent.d+" 天後"}${urgent.k}！`:`${urgent.m.en.name}\n${urgent.k} ${urgent.d===0?"today":"in "+urgent.d+" days"}!`}
+  else if(done){drawPet("party");$("#pxsay").textContent=zh?`已經完成 ${done} 場出攤！`:`${done} market${done>1?"s":""} done!`}
+  else {drawPet("ok");$("#pxsay").textContent=zh?"每完成一步，就按「下一步」。":"Tap Next step as you go."}
+  $("#pxlist").innerHTML=list.map(m=>{const s=prog[m.id]||0, x=m[lang];
+    const o=m.opens?dleft(m.opens):null, dl=m.deadline?dleft(m.deadline):null, st=dleft(m.start);
+    const first=o!=null&&o>0?meter(zh?"天後開放報名":"days to open",100-o*3,o,"--px-blue"):dl!=null&&dl>=0?meter(zh?"天後報名截止":"days to deadline",100-dl*3,dl,"--px-pink"):meter(zh?"報名中":"Open",100,"OPEN","--px-green");
+    return `<section class="qpanel"><div class="qhead"><div style="min-width:0"><h2 class="qname">${esc(x.name)}</h2><div class="org">${esc(m.org[lang])}・${esc(x.city)}</div></div><span class="qtag">${STEPS[lang][Math.min(s,4)]}${s>=4?" ★":""}</span></div>
+      <div class="meters">${first}${meter(zh?"天後出攤":"days to market",100-st*1.2,Math.max(st,0),"--bg")}</div>
+      <div class="steps">${STEPS[lang].map((n,i)=>`<span class="step ${i<s||s>=4?"done":i===s?"now":""}">${n}</span>`).join("")}</div>
+      <div class="actions"><a class="btn ghost" href="${esc(m.apply)}" target="_blank" rel="noopener">${zh?"報名頁":"Form"} ↗</a><button type="button" class="btn primary" data-step="${m.id}" ${s>=4?"disabled":""}>${s>=4?(zh?"完成 ★":"Done ★"):(zh?"下一步 +25":"Next step +25")}</button>${s>0?`<button type="button" class="btn ghost" data-stepback="${m.id}">${zh?"退一步":"Undo"}</button>`:""}</div></section>`}).join("");
+}
+let pxT; function pxToast(t){let el=$("#pxtoast"); if(!el){el=document.createElement("div");el.id="pxtoast";el.className="pxtoast";document.body.appendChild(el)} el.textContent=t; el.hidden=false; clearTimeout(pxT); pxT=setTimeout(()=>el.hidden=true,1500)}
+document.addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.step){const id=b.dataset.step; prog[id]=Math.min(4,(prog[id]||0)+1); store.set("mh-prog",prog); pxToast(prog[id]>=4?"STAGE CLEAR! +25 XP":"+25 XP"); renderProgress();}
+  if(b.dataset.stepback){const id=b.dataset.stepback; prog[id]=Math.max(0,(prog[id]||0)-1); store.set("mh-prog",prog); renderProgress();}
+});
+
+
+/* ---------- buddy: little stall pops up when you head to an application form ---------- */
+const BUDDY_LINES={zh:["前往報名！祝你錄取～","前往報名！名額很搶手喔","前往報名！記得截圖存證"],en:["Off to apply! Good luck!","Off to apply! Spots go fast","Off to apply! Save a screenshot"]};
+let buddyT;
+function showBuddy(){
+  let b=$("#buddy");
+  if(!b){b=document.createElement("div");b.id="buddy";b.className="buddy";b.setAttribute("aria-live","polite");b.innerHTML='<div class="say"></div><canvas width="22" height="22" aria-hidden="true"></canvas>';document.body.appendChild(b);}
+  const lines=BUDDY_LINES[lang]; b.querySelector(".say").textContent=lines[Math.floor(Math.random()*lines.length)];
+  drawPet("party",b.querySelector("canvas"));
+  b.hidden=false; b.classList.remove("hide"); void b.offsetWidth; b.classList.add("show");
+  clearTimeout(buddyT); buddyT=setTimeout(()=>{b.classList.remove("show");b.classList.add("hide");setTimeout(()=>{b.hidden=true},360)},2600);
+}
+function buddyCheer(m){ const c=$("#rc-"+m.id), t=$("#rs-"+m.id); if(!c||!t) return; drawPet("party",c); t.textContent=T[lang].buddyDone; t.classList.remove("bump"); void t.offsetWidth; t.classList.add("bump"); }
+document.addEventListener("click",e=>{ const a=e.target.closest('a[id^="rg-"]'); if(!a) return; const m=MARKETS.find(x=>"rg-"+x.id===a.id); if(m) buddyCheer(m); },true);
+
+
+/* ---------- funfair strip (pixel, animated): balanced vignette — ferris wheel as centerpiece, tent front-left, carousel front-right, coaster arcing behind on the right ---------- */
+(function(){
+  const c=document.getElementById("fair"); if(!c) return; const x=c.getContext("2d"); const W=116,H=44;
+  const K="#141414",R="#E53935",RD="#B71C1C",Wt="#FFFFFF",Y="#FFC814",B="#1E88E5",BD="#1565C0",P="#EC407A",G="#43A047",GR="#9BE38F",GD="#66BB6A",GOLD="#C9A227",NAVY="#3B2F8F",HILL="#C9D7F2",TRK="#8C84A0",SUP="#C3BDD3";
+  const px=(col,a,b,w=1,h=1)=>{x.fillStyle=col;x.fillRect(Math.round(a),Math.round(b),w,h)};
+  function line(col,x0,y0,x1,y1){x0=Math.round(x0);y0=Math.round(y0);x1=Math.round(x1);y1=Math.round(y1);const dx=Math.abs(x1-x0),dy=-Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;let e=dx+dy;for(;;){px(col,x0,y0);if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>=dy){e+=dy;x0+=sx}if(e2<=dx){e+=dx;y0+=sy}}}
+  function ring(col,cx,cy,r){let a0=null,b0=null;for(let a=0;a<=360;a+=4){const t=a*Math.PI/180,X=Math.round(cx+Math.cos(t)*r),Y2=Math.round(cy+Math.sin(t)*r);if(a0!==null)line(col,a0,b0,X,Y2);a0=X;b0=Y2}}
+  const PTS=[[62,39],[74,22],[84,26],[98,6],[109,26],[115,39]];
+  function ty(X){for(let i=0;i<PTS.length-1;i++){const[a0,b0]=PTS[i],[a1,b1]=PTS[i+1];if(X>=a0&&X<=a1){const t=(X-a0)/(a1-a0),k=(1-Math.cos(t*Math.PI))/2;return b0+(b1-b0)*k}}return 38}
+  function scene(f){
+    x.clearRect(0,0,W,H);
+    // back: soft hill
+    for(let X=0;X<W;X++){const hY=Math.round(40-9*Math.sin(X/W*Math.PI));if(hY<40)line(HILL,X,hY,X,40);}
+    // back: coaster arcing behind the right side
+    for(let X=64;X<116;X+=6){const Y0=Math.round(ty(X));line(SUP,X,Y0+1,X,40);}
+    for(let X=62;X<116;X++){px(TRK,X,ty(X));}
+    const cx=62+((f*0.7)%70); if(cx<114){const cy=ty(cx); px(R,cx-2,cy-3,5,2); px(K,cx-2,cy-1,5,1); px(Y,cx,cy-4,1,1);}
+    // ground
+    px(GR,0,40,W,4); for(let i=1;i<W;i+=4) px(GD,i,40,2,1);
+    // middle: ferris wheel (centerpiece)
+    const fx=56,fy=18,fr=14,rot=f*0.035;
+    line("#6D6875",fx,fy,fx-8,39);line("#6D6875",fx,fy,fx+8,39);line("#6D6875",fx-5,31,fx+5,31);
+    ring(K,fx,fy,fr); ring("#A9A4B3",fx,fy,fr-3);
+    for(let i=0;i<10;i++){const t=rot+i*Math.PI/5; line("#BDB8C6",fx,fy,fx+Math.cos(t)*(fr-1),fy+Math.sin(t)*(fr-1));}
+    const cols=[R,Y,B,P,G];
+    for(let i=0;i<5;i++){const t=rot+i*2*Math.PI/5,gx=fx+Math.cos(t)*fr,gy=fy+Math.sin(t)*fr;
+      px(K,gx,gy,1,1); px(cols[i],gx-2,gy+1,4,2); px(K,gx-2,gy+3,4,1);}
+    px(K,fx-1,fy-1,3,3); px(Y,fx,fy,1,1);
+    // front-right: carousel
+    const kx=86, top=21, kr=10;
+    px(GOLD,kx,top-3,1,2); px(Y,kx,top-4,1,1);
+    for(let i=0;i<=kr*2;i++){const dx=i-kr, yTop=top+Math.floor(Math.abs(dx)/2.4); const col=Math.floor((i+(f>>3))/2)%2?Wt:B; line(col,kx+dx,yTop,kx+dx,top+5);}
+    line(K,kx,top,kx-kr-1,top+4); line(K,kx,top,kx+kr+1,top+4); line(K,kx-kr-1,top+5,kx+kr+1,top+5);
+    for(let i=-kr;i<=kr;i+=2) px(((i+f)>>1)%2?Y:BD,kx+i,top+6,1,1);
+    px(GOLD,kx,top+6,1,12);
+    for(let i=0;i<4;i++){const ang=f*0.05+i*Math.PI/2; if(Math.cos(ang)<-0.3) continue;
+      const hx=kx+Math.sin(ang)*7, bob=Math.round(Math.sin(f*0.12+i*1.7)*1.4), hy=30+bob, col=[Wt,P,Y,Wt][i], face=Math.cos(ang)>0?1:-1;
+      line(GOLD,hx,top+7,hx,36); px(col,hx-2,hy,5,2); px(col,hx+face*2,hy-2,1,2); px(K,hx-2,hy+2,5,1);}
+    px(NAVY,kx-kr-1,37,kr*2+3,2); px(Y,kx-kr-1,36,kr*2+3,1); px(K,kx-kr-1,39,kr*2+3,1);
+    // front-left: circus tent (overlaps the wheel's left leg)
+    const tx=34, peak=22, base=40, half=12;
+    for(let X=tx-half;X<=tx+half;X++){const roofY=peak+Math.round(Math.abs(X-tx)*0.62); const stripe=Math.floor((X-tx+half)/3)%2;
+      line(stripe?Wt:R,X,roofY,X,peak+8);
+      if(Math.abs(X-tx)<=half-2) line(stripe?Wt:RD,X,peak+9,X,base-1);}
+    line(K,tx,peak,tx-half,peak+7); line(K,tx,peak,tx+half,peak+7);
+    for(let X=tx-half+1;X<tx+half;X+=3) px(Y,X,peak+8,2,1);
+    px(K,tx-3,base-8,7,8); px(NAVY,tx-2,base-7,5,7); px(Y,tx,base-7,1,7);
+    line(K,tx,peak-5,tx,peak); const w=(f>>2)%2; px(Y,tx+1,peak-5,3-w,1); px(Y,tx+1,peak-4,2+w,1);
+    // string of lights from tent peak to the wheel hub
+    for(let i=0;i<=8;i++){const lx=tx+(fx-tx)*i/8, ly=peak-2+Math.sin(i/8*Math.PI)*-1+ (i/8)*(fy-peak+2) + Math.sin(i/8*Math.PI)*3; px(((i+(f>>2))%2)?Y:Wt,lx,ly,1,1);}
+  }
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let f=0,last=0; function tick(t){ if(!document.hidden && t-last>100){ last=t; f++; scene(f); } requestAnimationFrame(tick); }
+  scene(0); if(!reduce) requestAnimationFrame(tick);
+})();
+function fairText(){ const el=document.getElementById("fairtxt"); if(!el) return; const n=MARKETS.filter(m=>["active","closing"].includes(status(m).g)).length; const nn=MARKETS.filter(isNew).length; el.innerHTML=lang==="zh"?(nn?`上次之後新增 <b>${nn}</b> 場<br>共 ${n} 場開放報名`:`現在有 <b>${n}</b> 場<br>開放報名`):(nn?`<b>${nn}</b> new since last visit<br>${n} open now`:`<b>${n}</b> markets<br>open now`); }
+
+
+/* ---------- Seasonal decorations: each festival shows from 7 days before until the day itself ---------- */
+(function(){
+  const PAL={o:"#FF8C1A",O:"#C95A08",k:"#141414",g:"#4CAF50",G:"#2E7D32",r:"#F44336",R:"#B71C1C",w:"#FFFFFF",y:"#FFE14D",Y:"#F9A825",p:"#F48FB1",P:"#EC407A",b:"#8D6E63",B:"#5D4037",c:"#81D4FA",C:"#0288D1",s:"#E0E0E0",l:"#AED581",n:"#FFCC80"};
+  function sprite(rows,scale,extra=""){const h=rows.length,w=rows[0].length;let r="";rows.forEach((row,y)=>[...row].forEach((ch,x)=>{if(PAL[ch])r+=`<rect x="${x}" y="${y}" width="1" height="1" fill="${PAL[ch]}"/>`}));return `<svg viewBox="0 0 ${w} ${h}" width="${w*scale}" height="${h*scale}" ${extra}>${r}</svg>`}
+  const S={
+    PUMP:["....gG......","....Gg......","..oooooooo..",".oOooOOooOo.","oOoooOOoooOo","oOokkOOkkoOo","oOoykOOkyoOo","oOooooooooOo","oOokokkokoOo",".oOokkkkoOo.","..oooooooo.."],
+    PUMP2:[".....g.....","....gG.....","..ooooooo..",".oOooOooOo.","oOkkoOokkOo","oOoooOoooOo","oOkoookkoOo",".oOkkkkkOo.","..ooooooo.."],
+    SPIDER:["k...k...k",".k.kkk.k.","..kkkkk..","kkkrkrkkk","..kkkkk..",".k.kkk.k.","k...k...k"],
+    BAT:["k.........k","kk..k.k..kk","kkkkkkkkkkk",".kkkkkkkkk.","..k.....k.."],
+    TREE:["....y....","...yyy...","....g....","...ggg...","..gGgrg..","...ggg...","..ggGgg..",".gyggggg.","..ggggg..",".ggggrgg.","gggGgggyg","....B....","....B...."],
+    GIFT:["..r.r..","...r...","rrrrrrr","wwwrwww","wwwrwww","wwwrwww","wwwrwww"],
+    GIFT2:[".y...y.","..y.y..","ccccycc","ccccycc","yyyyyyy","ccccycc","ccccycc"],
+    SNOW:[".w.","www",".w."],
+    SNOW2:["w.w",".w.","w.w"],
+    BURST:["....y....",".y..y..y.","..y.y.y..","...yyy...","yyyyYyyyy","...yyy...","..y.y.y..",".y..y..y.","....y...."],
+    BURST2:["....p....","..p...p..","....P....",".p.PPP.p.","..PPwPP..",".p.PPP.p.","....P....","..p...p..","....p...."],
+    STAR:[".y.","yyy",".y."],
+    LANTERN:["..kkk..",".yyyyy.","rrrrrrr","rRrrrRr","rRryrRr","rRrrrRr","rrrrrrr",".yyyyy.","..y.y..","..y.y.."],
+    FIRECR:["...y..","..k...","rrRrr.","rrRrr.","yyyyy.","rrRrr.","rrRrr.","yyyyy.","rrRrr.","rrRrr."],
+    COIN:[".yy.","yYYy","yYYy",".yy."],
+    PETAL:[".p.","pPp",".p."],
+    HEART:[".PP.PP.","PPPPPPP","PPwPPPP","PPPPPPP",".PPPPP.","..PPP..","...P..."],
+    HEARTs:["p.p","ppp",".p."],
+    LETTER:["wwwwwwwww","wPwwwwwPw","wwPwwwPww","wwwPPPwww","wwwwPwwww","wwwwwwwww"],
+    CARN:[".P.P.P.","PpPpPpP",".PpPpP.","..PPP..","...g...","..lg...","...gl..","...g...","...g..."],
+    BOWL:["..w.w.w..",".wwwwwww.","rrrrrrrrr",".rrrrrrr.","..rrrrr..","...RRR..."],
+    ZONG:["....G....","...gGg...","..gggGg..",".ggGgggg.","gggggGggg","kkkkkkkkk",".ggggGgg.","..gGgggg.","...ggGg.."],
+    BOAT:["k.................","kr................","rrr...............","rkrrrrrrrrrrrrrrr.",".rrRrRrRrRrRrRrrrr","..RRRRRRRRRRRRRRR.","...........k......"],
+    WAVE:["..cc......cc......cc....",".cCCc....cCCc....cCCc...","cC..Cc..cC..Cc..cC..Cc..","C....CccC....CccC....Ccc"],
+    MAGPIE:["kk.........",".kkk...ww..","..kkkkkwkk.","...kkkkkkkk","....kk.k..."],
+    TIE:[".CCC.","..C..",".CCC.",".CcC.","CCcCC","CCcCC",".CcC.","..C.."],
+    MOON:["....yyyyy....","..yyyyyyyyy..",".yyyyYyyyyyy.",".yyyyyyyyYyy.","yyyYyyyyyyyyy","yyyyyyyyyyyyy","yyyyyyyyyYyyy","yYyyyyyyyyyyy","yyyyyyyyyyyyy",".yyyyyyYyyyy.",".yyyyyyyyyyy.","..yyyyyyyyy..","....yyyyy...."],
+    RABBIT:[".w.w.",".w.w.",".www.","wwkww","wwwww",".www.","wwwww",".w.w."],
+    CAKE:["..bbbbb..",".bnnnnnb.","bnnBnBnnb","bnBnnnBnb","bnnBnBnnb",".bnnnnnb.","..bbbbb.."],
+    POMELO:["....G....","...lG....",".lllll...","lllllll..","lllllll..",".lllll..."]
+  };
+  const ymd=s=>{const d=new Date(s+"T00:00:00");return d};
+  const addDays=(s,n)=>{const d=ymd(s);d.setDate(d.getDate()+n);return iso(d)};
+  // Lunar-calendar dates (looked up 2026-10; add a new year here every year)
+  const LUNAR={
+    2027:{cny:"2027-02-06",lantern:"2027-02-20",dragon:"2027-06-09",qixi:"2027-08-08",moon:"2027-09-15"},
+    2028:{cny:"2028-01-26",lantern:"2028-02-09",dragon:"2028-05-28",qixi:"2028-08-26",moon:"2028-10-03"}
+  };
+  function mothersDay(y){const d=new Date(y,4,1);const add=(7-d.getDay())%7;d.setDate(1+add+7);return iso(d)}
+  function festivals(y){
+    const L=LUNAR[y]||{}; const out=[];
+    const add=(id,date,after=0)=>{if(date)out.push({id,date,from:addDays(date,-7),to:addDays(date,after)})};
+    add("halloween",`${y}-10-31`,1); add("xmas",`${y}-12-25`); add("newyear",`${y}-01-01`);
+    add("newyear",`${y+1}-01-01`); add("cny",L.cny,5); add("valentine",`${y}-02-14`); add("lantern",L.lantern);
+    add("mother",mothersDay(y)); add("dragon",L.dragon); add("qixi",L.qixi); add("father",`${y}-08-08`); add("moon",L.moon);
+    return out;
+  }
+  function pick(t){
+    const y=+t.slice(0,4); const act=[...festivals(y-1),...festivals(y)].filter(f=>f.from<=t&&t<=f.to).sort((a,b)=>a.date<b.date?-1:1);
+    return (act.find(f=>f.date>=t)||act[act.length-1]||null);
+  }
+  let forced=null; try{forced=new URLSearchParams(location.search).get("fest")}catch(e){}
+  const cur=forced?{id:forced}:pick(iso(today()));
+  if(!cur) return;
+
+  const at=(css,html)=>`<div style="position:absolute;${css}">${html}</div>`;
+  const hang=(css,len,html,dur)=>`<div style="position:absolute;${css}"><svg width="2" height="${len}" style="position:absolute;left:50%;top:0"><rect width="1" height="${len}" fill="#fff" opacity=".7"/></svg><div class="spider" style="position:absolute;top:${len-6}px;left:0;${dur?`animation-duration:${dur}s`:""}">${html}</div></div>`;
+  function rain(list,n,cls="fall"){let h="";for(let i=0;i<n;i++){const s=list[i%list.length];const left=(i*37+11)%100;const dur=9+(i*7)%9;const del=-((i*13)%dur);h+=`<div class="${cls}" style="left:${left}%;animation-duration:${dur}s;animation-delay:${del}s;${cls==="twinkle"?`top:${(i*29)%90}%`:cls==="rise"?"bottom:-50px":"top:-40px"}">${sprite(s[0],s[1])}</div>`}return h}
+  function flyer(spr,scale,top,dur,delay){return `<div class="batpath" style="top:${top};animation-duration:${dur}s;animation-delay:${delay}s"><div class="bat">${sprite(spr,scale)}</div></div>`}
+  function web(corner){
+    let d=""; const N=150;
+    const rays=[0,18,36,54,72,90]; const pts=r=>rays.map(a=>{const t=a*Math.PI/180;return[Math.round(Math.cos(t)*r),Math.round(Math.sin(t)*r)]});
+    rays.forEach(a=>{const t=a*Math.PI/180;d+=`M0 0L${Math.round(Math.cos(t)*N)} ${Math.round(Math.sin(t)*N)}`});
+    [30,60,92,125].forEach(r=>{const p=pts(r);d+=`M${p[0][0]} ${p[0][1]}`;for(let i=1;i<p.length;i++){const mx=(p[i-1][0]+p[i][0])/2*0.9,my=(p[i-1][1]+p[i][1])/2*0.9;d+=`Q${mx} ${my} ${p[i][0]} ${p[i][1]}`}});
+    const tf=corner==="tr"?`transform="scale(-1,1) translate(-${N},0)"`:corner==="bl"?`transform="scale(1,-1) translate(0,-${N})"`:"";
+    return `<svg class="web" viewBox="0 0 ${N} ${N}" style="${corner.includes("t")?"top":"bottom"}:0;${corner.includes("l")?"left":"right"}:0"><g ${tf}><path d="${d}" fill="none" stroke="#fff" stroke-width="1.5"/></g></svg>`;
+  }
+  const chun=`<svg width="40" height="40" viewBox="0 0 40 40" shape-rendering="crispEdges"><rect x="6" y="6" width="28" height="28" transform="rotate(45 20 20)" fill="#F44336" stroke="#FFE14D" stroke-width="2"/><text x="20" y="27" text-anchor="middle" font-family="DotGothic16,sans-serif" font-size="18" fill="#FFE14D">春</text></svg>`;
+
+  const F={
+    halloween:{body:web("tl")+web("tr")+web("bl")+hang("right:42px;top:0",70,sprite(S.SPIDER,3))+hang("left:30px;top:0",156,sprite(S.SPIDER,2),4)
+      +at("left:8px;bottom:10px",sprite(S.PUMP,4))+at("left:58px;bottom:8px",sprite(S.PUMP2,3))+at("right:10px;bottom:12px",sprite(S.PUMP,5))
+      +flyer(S.BAT,3,"38%",18,0)+flyer(S.BAT,2,"62%",26,-9), head:sprite(S.PUMP2,3)+sprite(S.PUMP,4)},
+    xmas:{body:rain([[S.SNOW,3],[S.SNOW2,2],[S.SNOW,2]],18)+at("left:6px;bottom:6px",sprite(S.TREE,6))+at("left:62px;bottom:6px",sprite(S.GIFT,4))
+      +at("right:8px;bottom:6px",sprite(S.GIFT2,5))+at("right:48px;bottom:6px",sprite(S.GIFT,3)), head:sprite(S.GIFT,3)+sprite(S.TREE,3)},
+    newyear:{body:at("left:-12px;top:34%",`<div class="blink">${sprite(S.BURST,5)}</div>`)+at("right:-14px;top:18%",`<div class="blink" style="animation-delay:-.7s">${sprite(S.BURST2,5)}</div>`)
+      +at("left:-10px;top:66%",`<div class="blink" style="animation-delay:-1.2s">${sprite(S.BURST2,4)}</div>`)+at("right:-10px;top:78%",`<div class="blink" style="animation-delay:-.3s">${sprite(S.BURST,4)}</div>`)
+      +rain([[S.STAR,2]],10,"twinkle"), head:sprite(S.BURST,3)+sprite(S.BURST2,3)},
+    cny:{body:hang("right:4px;top:0",150,sprite(S.LANTERN,4))+hang("left:2px;top:0",230,sprite(S.LANTERN,3),4.5)
+      +rain([[S.COIN,3],[S.PETAL,3],[S.PETAL,2]],14)+at("left:8px;bottom:8px",sprite(S.FIRECR,4))+at("right:10px;bottom:10px",chun), head:sprite(S.LANTERN,3)+sprite(S.LANTERN,3)},
+    valentine:{body:rain([[S.HEART,3],[S.HEARTs,3],[S.HEART,2]],14)+at("left:8px;bottom:10px",sprite(S.LETTER,5))+at("right:10px;bottom:10px",sprite(S.HEART,6)), head:sprite(S.HEART,3)+sprite(S.LETTER,3)},
+    lantern:{body:rain([[S.LANTERN,4],[S.LANTERN,3],[S.LANTERN,2]],12,"rise")+at("left:8px;bottom:8px",sprite(S.BOWL,5))+at("right:10px;bottom:8px",sprite(S.LANTERN,6)), head:sprite(S.LANTERN,3)+sprite(S.BOWL,3)},
+    mother:{body:rain([[S.HEARTs,3],[S.PETAL,3]],12)+at("left:8px;bottom:6px",sprite(S.CARN,6))+at("left:52px;bottom:6px",sprite(S.CARN,4))+at("right:10px;bottom:6px",sprite(S.CARN,7)), head:sprite(S.CARN,3)+sprite(S.HEART,3)},
+    dragon:{body:at("left:0;right:0;bottom:0;display:flex;overflow:hidden",sprite(S.WAVE,4).repeat(10))+`<div class="batpath" style="bottom:14px;top:auto;animation-duration:22s">${sprite(S.BOAT,4)}</div>`
+      +at("left:8px;bottom:30px",sprite(S.ZONG,5))+at("right:10px;bottom:30px",sprite(S.ZONG,4)), head:sprite(S.ZONG,3)+sprite(S.ZONG,3)},
+    qixi:{body:rain([[S.STAR,3],[S.STAR,2]],16,"twinkle")+flyer(S.MAGPIE,4,"30%",20,0)+flyer(S.MAGPIE,3,"34%",20,-1.5)+at("right:10px;bottom:10px",sprite(S.HEART,5)), head:sprite(S.MAGPIE,3)+sprite(S.HEART,3)},
+    father:{body:rain([[S.STAR,3],[S.STAR,2]],10,"twinkle")+at("left:10px;bottom:10px",sprite(S.TIE,7))+at("right:10px;bottom:8px",sprite(S.GIFT2,5)), head:sprite(S.TIE,3)+sprite(S.GIFT2,3)},
+    moon:{body:at("right:-40px;top:70px;opacity:.9",sprite(S.MOON,8))+rain([[S.STAR,2]],12,"twinkle")
+      +at("left:8px;bottom:8px",sprite(S.CAKE,6))+at("left:72px;bottom:8px",sprite(S.POMELO,5))+at("right:10px;bottom:8px",sprite(S.CAKE,4)), head:sprite(S.CAKE,3)+sprite(S.RABBIT,3)}
+  };
+  const f=F[cur.id]; if(!f) return;
+  document.body.dataset.fest=cur.id;
+  const layer=document.createElement("div"); layer.className="hw"; layer.setAttribute("aria-hidden","true");
+  layer.innerHTML=f.body; document.body.prepend(layer);
+  const hw=document.querySelector("header .wrap"); if(hw&&f.head){const d=document.createElement("div");d.className="hwhead";d.setAttribute("aria-hidden","true");d.innerHTML=f.head;hw.appendChild(d);}
+})();
+
+/* ---------- shell ---------- */
+function render(){
+  const L=T[lang];
+  document.documentElement.lang = lang==="zh"?"zh-Hant-TW":"en"; document.body.dataset.lang=lang;
+  $("#lang-zh").setAttribute("aria-pressed",lang==="zh"); $("#lang-en").setAttribute("aria-pressed",lang==="en");
+  ["list","progress","calendar","expos","organizers","guide"].forEach(v=>{ $("#view-"+v).hidden = v!==view; $("#tab-"+v).setAttribute("aria-selected",String(v===view)); });
+  fairText(); if(view==="list") renderList(); else if(view==="calendar") renderCalendar(); else if(view==="organizers") renderOrgs(); else if(view==="progress") renderProgress(); else if(view==="expos") renderExpos();
+  $("#foot").innerHTML=`<a class="btn ghost fb" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">${esc(L.fb)} ↗</a><span>${esc(L.foot)}</span><span class="updated">${esc(L.updated)}</span>`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button,a"); if(!b) return;
+  if(b.id==="lang-zh"||b.id==="lang-en"){ lang=b.id==="lang-zh"?"zh":"en"; store.set("mh-lang",lang); render(); return; }
+  if(b.dataset.view){ view=b.dataset.view; try{ history.replaceState(null,"","#"+view); }catch(_){} render(); window.scrollTo({top:0}); return; }
+  if(b.dataset.quick){ const k=b.dataset.quick; F.quick.has(k)?F.quick.delete(k):F.quick.add(k); if(k==="closing"&&F.quick.has(k)) F.status="all"; renderList(); return; }
+  if(b.id==="reset"){ Object.assign(F,{q:"",region:"all",cat:"all",status:"active",month:"all"}); F.quick.clear(); renderList(); return; }
+  if(b.dataset.fav){ const id=b.dataset.fav; favs.has(id)?favs.delete(id):favs.add(id); store.set("mh-favs",[...favs]); renderList(); return; }
+  if(b.dataset.expand){ const id=b.dataset.expand; if(expanded.has(id)||openRemind.has(id)){expanded.delete(id);openRemind.delete(id);} else expanded.add(id); renderList(); return; }
+  if(b.dataset.toggle){ const id=b.dataset.toggle; openRemind.has(id)?openRemind.delete(id):openRemind.add(id); renderList(); return; }
+  if(b.dataset.preset){ $("#rn-"+b.dataset.r).value=b.dataset.preset; updateRemind(MARKETS.find(x=>x.id===b.dataset.r)); return; }
+  if(b.dataset.ics){ saveIcs(MARKETS.find(x=>x.id===b.dataset.ics)); return; }
+  if(b.dataset.notify){ notifyMe(MARKETS.find(x=>x.id===b.dataset.notify)); return; }
+  if(b.dataset.expof){ expoF=b.dataset.expof; renderExpos(); return; }
+  if(b.dataset.day){ calDay=b.dataset.day; renderCalendar(); return; }
+  if(b.id==="cal-fav"){ calFav=!calFav; renderCalendar(); return; }
+  if(b.id==="cal-prev"||b.id==="cal-next"){ const ms=calMonths(); const i=ms.indexOf(calMonth)+(b.id==="cal-next"?1:-1); if(ms[i]){calMonth=ms[i]; renderCalendar();} return; }
+  if(b.hasAttribute("aria-disabled")) e.preventDefault();
+});
+let qT; document.addEventListener("input",e=>{
+  if(e.target.id==="q"){ clearTimeout(qT); qT=setTimeout(()=>{ F.q=e.target.value; const pos=e.target.selectionStart; renderList(); const q=$("#q"); q.focus(); try{q.setSelectionRange(pos,pos)}catch(_){} },200); return; }
+  const r=e.target.dataset&&e.target.dataset.r; if(r) updateRemind(MARKETS.find(x=>x.id===r));
+});
+document.addEventListener("change",e=>{
+  const map={"f-region":"region","f-cat":"cat","f-status":"status","f-month":"month"};
+  if(map[e.target.id]){ F[map[e.target.id]]=e.target.value; renderList(); return; }
+  const r=e.target.dataset&&e.target.dataset.r; if(r) updateRemind(MARKETS.find(x=>x.id===r));
+});
+const h0=(location.hash||"").slice(1); if(["list","progress","calendar","expos","organizers","guide"].includes(h0)) view=h0;
+renderGloss(); render();
+
+(async function loadRemote(){
+  let url=null;
+  try{ if(/github\.io$/.test(location.hostname)) url="data.json"; else if(GH_USER!=="USERNAME") url=`https://${GH_USER}.github.io/${GH_REPO}/data.json`; }catch(_){}
+  if(!url) return;
+  try{
+    const ctl=new AbortController(); const tm=setTimeout(()=>ctl.abort(),5000);
+    const r=await fetch(url+"?t="+Date.now(),{signal:ctl.signal,cache:"no-store"}); clearTimeout(tm);
+    if(!r.ok) return; const d=await r.json();
+    if(!d||!Array.isArray(d.MARKETS)||!d.MARKETS.length) return;
+    if(d.updated&&d.updated<UPDATED) return;
+    [[MARKETS,d.MARKETS],[EXPOS,d.EXPOS],[ORGS,d.ORGS]].forEach(([a,b])=>{ if(Array.isArray(b)&&b.length){ a.length=0; a.push(...b); } });
+    if(d.updated){ UPDATED=d.updated; T.zh.updated=`資料更新：${d.updated}`; T.en.updated=`Updated ${d.updated}`; }
+    render();
+  }catch(_){}
+})();
+</script>
+
+</body></html>
