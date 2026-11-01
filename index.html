@@ -248,7 +248,7 @@ footer .updated{color:var(--yellow);font-family:var(--f-num);font-size:10px}
 .fairtxt b{font-family:var(--f-num);font-size:13px;color:#EC407A}
 .fair canvas{display:block;height:58px;width:auto;image-rendering:pixelated;flex:none;align-self:flex-end;margin-right:10px}
 .hw{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-header,nav.tabs,main,footer{position:relative;z-index:1}
+header,main,footer{position:relative;z-index:1}
 nav.tabs{z-index:5}
 .hw svg{shape-rendering:crispEdges;display:block}.hw>svg{position:absolute}
 .hw .fall,.hw .rise{opacity:.6}
@@ -276,10 +276,14 @@ header .wrap{position:relative}
 @media (prefers-reduced-motion:reduce){.hw .twinkle,.hw .blink{animation:none}.hw .fall,.hw .rise{display:none}}
 .helpstrip{display:block;margin-top:10px;background:#BFE3FF;border:3px solid #141414;box-shadow:4px 4px 0 rgba(0,0,0,.3);padding:8px 12px;color:#141414;text-decoration:none;font-size:14px;line-height:1.45}
 .helpstrip b{font-family:var(--f-pixel);font-weight:400;margin-right:4px}
+.sharerow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .applynote{font-size:13px;color:#4E4A57}
 .formhelp{justify-self:start;white-space:nowrap;font-family:var(--f-pixel);font-size:14px;color:#141414;background:#BFE3FF;border:2px solid #141414;padding:2px 8px;text-decoration:none}
 .newtag{display:inline-block;font:9px/1 var(--f-num);background:#EC407A;color:#fff;border:2px solid #141414;padding:3px 4px;margin-right:6px;vertical-align:2px}
-footer .fb{justify-self:start;background:var(--yellow)}
+footer .fb{justify-self:start;background:#fff}
+.recbox{background:#fff;color:#141414;border:3px solid #141414;box-shadow:6px 6px 0 rgba(0,0,0,.3);padding:14px 16px;display:grid;gap:8px;justify-items:start;margin-bottom:8px}
+.recbox h3{margin:0;font-family:var(--f-pixel);font-weight:400;font-size:18px}
+.recbox p{margin:0;font-size:14px;color:#4E4A57}
 .rbuddy{display:flex;align-items:center;gap:8px}
 .rbuddy canvas{width:56px;height:56px;image-rendering:pixelated;flex:none;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.25))}
 .rsay{background:#fff;border:3px solid #141414;box-shadow:3px 3px 0 #141414;padding:6px 10px;font-family:var(--f-pixel);font-size:14px;position:relative;min-width:0}
@@ -420,7 +424,7 @@ footer .fb{justify-self:start;background:var(--yellow)}
 <script>
 let UPDATED = "2026-10-28";
 /* Remote data: edit GH_USER after the GitHub repo exists. Website on GitHub Pages reads ./data.json; the app reads the same file over HTTPS. Falls back to the data below if offline. */
-const GH_USER = "USERNAME", GH_REPO = "markethub";
+const GH_USER = "hey-souleya", GH_REPO = "markethub";
 const S17 = "https://17847market.com.tw/monthly-vendor-202611/";
 const GDS = id => "https://gds.apothecary1969.com/web/activity/activity_in.jsp?cp_id=" + id;
 const GD_ORG = {zh:"好日市集",en:"Good Days Market (Taipei)"};
@@ -646,7 +650,7 @@ const T = {
   ics:"加入 iPhone／Outlook 行事曆",gcal:"加入 Google 日曆",
   icsHint:"iPhone 下載後點開，就會跳出「加入行事曆」，提醒時間會一起帶入。",
   icsNo:"這個預覽頁面不能下載行事曆檔，請先用 Google 日曆。",icsSaved:"已下載，點開檔案就能加入行事曆。",icsDeclined:"已取消下載。",
-  gHint:"Google 日曆會在提醒當天建立一個事件，並用你的預設通知。",notify:"到時通知我",report:"資料有誤？回報",fb:"回報錯誤／推薦市集",more:"看詳情",less:"收起",openShort:"已開放",buddyAsk:"要我提醒你嗎？時間到我叫你前往報名！",buddyDone:"設好了！時間到我會叫你前往報名～",icsNative:"加入 iPhone 行事曆",nativeHint:"「到時通知我」會在提醒當天早上 9 點跳通知；「加入 iPhone 行事曆」會把活動和提醒一起寫進行事曆。",notifyOk:d=>`已設定，${d} 早上 9 點會通知你。`,calOk:"已加入 iPhone 行事曆，提醒也設好了。",denied:"需要你允許權限才能設定，可以到 iPhone 的「設定」裡開啟。",
+  gHint:"Google 日曆會在提醒當天建立一個事件，並用你的預設通知。",notify:"到時通知我",report:"資料有誤？回報",fb:"回報資料錯誤",recH:"有喜歡的市集想推薦嗎？",recP:"私訊 @markethub.tw，告訴我們市集名稱和主辦方的 IG 或官網。我們會看過主辦方的資料再決定要不要收錄。",recB:"推薦市集",more:"看詳情",less:"收起",openShort:"已開放",buddyAsk:"要我提醒你嗎？時間到我叫你前往報名！",buddyDone:"設好了！時間到我會叫你前往報名～",icsNative:"加入 Apple 行事曆",nativeHint:"「到時通知我」會在提醒當天早上 9 點跳通知；「加入 Apple 行事曆」會把活動和提醒一起寫進 iPhone 行事曆；用 Google 日曆的話，按「加入 Google 日曆」，確認後儲存。",notifyOk:d=>`已設定，${d} 早上 9 點會通知你。`,calOk:"已加入 iPhone 行事曆，提醒也設好了。",denied:"需要你允許權限才能設定，可以到 iPhone 的「設定」裡開啟。",
   count:n=>`共 ${n} 個市集`,reset:"清除篩選",empty:"沒有符合條件的市集，試著放寬篩選。",
   wk:["日","一","二","三","四","五","六"],wkMon:["一","二","三","四","五","六","日"],
   evDl:n=>`【報名截止】${n}`,evStart:n=>`【市集】${n}`,evOpen:n=>`【開放報名】${n}`,evRemind:(n,b,d)=>`提醒：${n}（${b} ${d}）`,
@@ -669,7 +673,7 @@ const T = {
   ics:"Add to iPhone / Outlook calendar",gcal:"Add to Google Calendar",
   icsHint:"On iPhone, open the downloaded file and tap Add to Calendar. The reminder comes with it.",
   icsNo:"This preview can't download calendar files. Use Google Calendar for now.",icsSaved:"Downloaded. Open the file to add it to your calendar.",icsDeclined:"Download cancelled.",
-  gHint:"Google Calendar creates an event on the reminder day with your default notification.",notify:"Notify me",report:"Wrong info? Tell us",fb:"Report an error / suggest a market",more:"Details",less:"Hide",openShort:"Open now",buddyAsk:"Want a reminder? I'll tell you when it's time to apply!",buddyDone:"All set! I'll tell you when it's time to apply.",icsNative:"Add to iPhone Calendar",nativeHint:"Notify me sends a notification at 9am on the reminder day. Add to iPhone Calendar saves the event with its reminder.",notifyOk:d=>`Done. You will get a notification at 9am on ${d}.`,calOk:"Added to your iPhone Calendar with the reminder.",denied:"Permission is needed. You can turn it on in iPhone Settings.",
+  gHint:"Google Calendar creates an event on the reminder day with your default notification.",notify:"Notify me",report:"Wrong info? Tell us",fb:"Report wrong info",recH:"Know a great market we're missing?",recP:"DM @markethub.tw with the market's name and the organizer's IG or website. We review every suggestion before adding it.",recB:"Suggest a market",more:"Details",less:"Hide",openShort:"Open now",buddyAsk:"Want a reminder? I'll tell you when it's time to apply!",buddyDone:"All set! I'll tell you when it's time to apply.",icsNative:"Add to Apple Calendar",nativeHint:"Notify me sends a notification at 9am on the reminder day. Add to Apple Calendar saves the event with its reminder. Use Google Calendar? Tap Add to Google Calendar and save.",notifyOk:d=>`Done. You will get a notification at 9am on ${d}.`,calOk:"Added to your iPhone Calendar with the reminder.",denied:"Permission is needed. You can turn it on in iPhone Settings.",
   count:n=>`${n} markets`,reset:"Clear filters",empty:"No markets match. Try fewer filters.",
   wk:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],wkMon:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
   evDl:n=>`Application deadline: ${n}`,evStart:n=>`Market: ${n}`,evOpen:n=>`Applications open: ${n}`,evRemind:(n,b,d)=>`Reminder: ${n} (${b} ${d})`,
@@ -784,13 +788,14 @@ function remindPanel(m){
     <div class="row">
       ${isNative?`<button type="button" class="btn primary" data-notify="${m.id}">${L.notify}</button>`:""}
       <button type="button" class="btn ${isNative?"ghost":"primary"}" data-ics="${m.id}">${isNative?L.icsNative:L.ics}</button>
-      ${isNative?"":`<a class="btn ghost" id="rg-${m.id}" href="#" target="_blank" rel="noopener">${L.gcal}</a>`}
+      <a class="btn ghost" id="rg-${m.id}" href="#" target="_blank" rel="noopener">${L.gcal}</a>
     </div>
     <div class="hint" id="rh-${m.id}">${isNative?L.nativeHint:(inArtifact?L.icsNo:L.icsHint)+" "+L.gHint}</div>
   </div>`;
 }
 const expanded=new Set();
 document.addEventListener("click",e=>{ if(e.target.closest("button,a,input,select,label")) return; const c=e.target.closest(".ticket.mini[data-card]"); if(!c) return; expanded.add(c.dataset.card); renderList(); });
+document.addEventListener("click",e=>{ if(e.target.closest("button,a,input,select,label")) return; const c=e.target.closest(".ticket.mini[data-expo]"); if(!c) return; expoOpen.add(c.dataset.expo); renderExpos(); });
 function card(m){
   const L=T[lang], x=m[lang], s=status(m), sd=pd(m.start), ed=pd(m.end), C=lang==="zh"?"：":": ";
   const mon = lang==="zh"?`${sd.getMonth()+1} 月`:sd.toLocaleDateString("en",{month:"short"}).toUpperCase();
@@ -818,7 +823,7 @@ function card(m){
     <div class="applynote"><span class="zh">送出報名不代表錄取，結果以主辦方通知為準。</span><span class="en">Applying doesn't guarantee a spot. The organizer decides and will let you know.</span></div>
     ${openRemind.has(m.id)?remindPanel(m):""}`}
     <div class="src">${L.src}${C}<a href="${esc(m.source)}" target="_blank" rel="noopener">${esc(new URL(m.source).hostname)}</a>・<a href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">${L.report}</a></div>
-    <button type="button" class="morebtn" data-expand="${m.id}">${L.less} ▴</button>`
+    <div class="sharerow"><button type="button" class="btn ghost small" data-share="m:${m.id}">${lang==="zh"?"分享":"Share"} ↗</button><button type="button" class="morebtn" data-expand="${m.id}">${L.less} ▴</button></div>`
     : "";
   return `<article class="ticket${open?"":" mini"}" data-card="${m.id}">
    <div class="when"><span class="m">${mon}</span><span class="d">${sd.getDate()}</span><span class="to">${to}</span></div>
@@ -981,7 +986,7 @@ const EXPOS = [
   en:{name:"FOOD TAIPEI 2027",org:"TAITRA",venue:"Taipei Nangang Exhibition Center",sched:"Jun 23–26, 2027",fee:"2023 ref: raw space from US$1,550 per 9 m²",timing:"Usually opens in late November of the prior year",note:"Mainly B2B; retail only on the public day, with invoices."},
   apply:"https://belize.org/wp-content/uploads/Food_Taipei-Application_Kit.pdf",source:"https://belize.org/wp-content/uploads/Food_Taipei-Application_Kit.pdf"},
 ];
-let expoF="all";
+let expoF="all"; const expoOpen=new Set();
 function renderExpos(){
   const L=T[lang], C=lang==="zh"?"：":": ";
   const lab={open:L.ex.open,opening:L.ex.opening,unknown:L.ex.unknown,closed:L.ex.closed};
@@ -992,10 +997,16 @@ function renderExpos(){
   $("#expo-list").innerHTML=list.map(e=>{const x=e[lang]; const sd=e.start?pd(e.start):null;
     const mon=sd?(lang==="zh"?`${sd.getFullYear()}<br>${sd.getMonth()+1} 月`:`${sd.getFullYear()}<br>${sd.toLocaleDateString("en",{month:"short"}).toUpperCase()}`):"TBA";
     const g=e.deadline&&pd(e.deadline)>=today()?`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent((lang==="zh"?"【展會報名截止】":"Expo deadline: ")+x.name)}&dates=${ymd(pd(e.deadline))}/${ymd(addDays(pd(e.deadline),1))}&details=${encodeURIComponent(e.apply)}`:"";
-    return `<article class="ticket"><div class="when"><span class="m">${mon}</span><span class="d">${sd?sd.getDate():"–"}</span></div><div class="body">
-      <div class="top"><div style="min-width:0"><h2 class="name">${esc(x.name)}</h2><div class="org">${esc(x.org)}</div></div></div>
-      <div class="pills"><span class="pill ${cls[e.status]}">${lab[e.status]}</span>${e.pick?`<span class="pill s-pick">${L.pill.pick}</span>`:""}${e.foreign==="yes"?`<span class="pill s-gov">${L.ex.fyes}</span>`:e.foreign==="unknown"?`<span class="pill s-upcoming">${L.ex.funk}</span>`:""}</div>
-      ${e.deadline&&e.status==="open"?`<div class="opens">${L.dl}${C}<b>${fmtDate(pd(e.deadline))}</b></div>`:""}
+    const op=expoOpen.has(e.id);
+    const pills=`<span class="pill ${cls[e.status]}">${lab[e.status]}</span>${e.pick?`<span class="pill s-pick">${L.pill.pick}</span>`:""}${e.foreign==="yes"?`<span class="pill s-gov">${L.ex.fyes}</span>`:e.foreign==="unknown"?`<span class="pill s-upcoming">${L.ex.funk}</span>`:""}`;
+    const dlLine=e.deadline&&e.status==="open"?`<div class="opens${op?"":" compact"}">${L.dl}${C}<b>${fmtDate(pd(e.deadline))}</b></div>`:"";
+    const head=`<div class="top"><button type="button" class="cardhit" data-expoexp="${e.id}" aria-expanded="${op}"><h2 class="name">${esc(x.name)}</h2><div class="org">${esc(x.org)}</div></button></div>`;
+    if(!op) return `<article class="ticket mini" data-expo="${e.id}"><div class="when"><span class="m">${mon}</span><span class="d">${sd?sd.getDate():"–"}</span></div><div class="body">${head}
+      <div class="orow">${dlLine}${pills}<span class="chev" aria-hidden="true">▾</span></div></div></article>`;
+    return `<article class="ticket" data-expo="${e.id}"><div class="when"><span class="m">${mon}</span><span class="d">${sd?sd.getDate():"–"}</span></div><div class="body">
+      ${head}
+      <div class="pills">${pills}</div>
+      ${dlLine}
       ${x.timing?`<div class="opens">${L.ex.timing}${C}<b>${esc(x.timing)}</b></div>`:""}
       <div class="meta"><span>${esc(x.venue)}</span><span>${L.ex.dates}${C}<b>${esc(x.sched)}</b></span><span>${L.ex.fee}${C}<b>${esc(x.fee)}</b></span></div>
       <div class="types">${e.cats.map(t=>`<span class="type">${L.cats[t]}</span>`).join("")}<span class="type">${L.regions[e.region]}</span></div>
@@ -1005,6 +1016,7 @@ function renderExpos(){
       <a class="formhelp en" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">Form in Chinese? Get help ↗</a>
       <div class="applynote"><span class="zh">送出報名不代表錄取，結果以主辦方通知為準。</span><span class="en">Applying doesn't guarantee a spot. The organizer decides and will let you know.</span></div>
       <div class="src">${L.src}${C}<a href="${esc(e.source)}" target="_blank" rel="noopener">${esc(new URL(e.source).hostname)}</a></div>
+      <div class="sharerow"><button type="button" class="btn ghost small" data-share="e:${e.id}">${lang==="zh"?"分享":"Share"} ↗</button><button type="button" class="morebtn" data-expoexp="${e.id}">${L.less} ▴</button></div>
     </div></article>`;}).join("");
 }
 
@@ -1058,6 +1070,17 @@ function renderProgress(){
       <div class="meters">${first}${meter(zh?"天後出攤":"days to market",100-st*1.2,Math.max(st,0),"--bg")}</div>
       <div class="steps">${STEPS[lang].map((n,i)=>`<span class="step ${i<s||s>=4?"done":i===s?"now":""}">${n}</span>`).join("")}</div>
       <div class="actions"><a class="btn ghost" href="${esc(m.apply)}" target="_blank" rel="noopener">${zh?"報名頁":"Form"} ↗</a><button type="button" class="btn primary" data-step="${m.id}" ${s>=4?"disabled":""}>${s>=4?(zh?"完成 ★":"Done ★"):(zh?"下一步 +25":"Next step +25")}</button>${s>0?`<button type="button" class="btn ghost" data-stepback="${m.id}">${zh?"退一步":"Undo"}</button>`:""}</div></section>`}).join("");
+}
+
+async function shareItem(key){
+  const [t,id]=key.split(":"); const it=(t==="m"?MARKETS:EXPOS).find(x=>x.id===id); if(!it) return;
+  const x=it[lang]; const zh=lang==="zh";
+  const url=`https://${GH_USER}.github.io/${GH_REPO}/#${t}=${encodeURIComponent(id)}`;
+  const opens=t==="m"&&it.opens&&pd(it.opens)>today()?(zh?`｜${fmtDate(pd(it.opens))} 開放報名`:` · applications open ${fmtDate(pd(it.opens))}`):"";
+  const text=zh?`【${x.name}】${x.sched||""}${opens}\n用「市集總匯」看詳情和報名連結：`:`${x.name} — ${x.sched||""}${opens}\nDetails and the application link on Taiwan Market Hub:`;
+  if(isNative){ const r=await callNative({action:"share",text,url}); if(r.ok) return; }
+  if(navigator.share){ try{ await navigator.share({title:x.name,text,url}); return; }catch(e){ if(e&&e.name==="AbortError") return; } }
+  try{ await navigator.clipboard.writeText(text+"\n"+url); pxToast(zh?"已複製連結":"Link copied"); }catch(_){ prompt(zh?"複製這段文字分享：":"Copy to share:",text+"\n"+url); }
 }
 let pxT; function pxToast(t){let el=$("#pxtoast"); if(!el){el=document.createElement("div");el.id="pxtoast";el.className="pxtoast";document.body.appendChild(el)} el.textContent=t; el.hidden=false; clearTimeout(pxT); pxT=setTimeout(()=>el.hidden=true,1500)}
 document.addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) return;
@@ -1248,7 +1271,7 @@ function render(){
   $("#lang-zh").setAttribute("aria-pressed",lang==="zh"); $("#lang-en").setAttribute("aria-pressed",lang==="en");
   ["list","progress","calendar","expos","organizers","guide"].forEach(v=>{ $("#view-"+v).hidden = v!==view; $("#tab-"+v).setAttribute("aria-selected",String(v===view)); });
   fairText(); if(view==="list") renderList(); else if(view==="calendar") renderCalendar(); else if(view==="organizers") renderOrgs(); else if(view==="progress") renderProgress(); else if(view==="expos") renderExpos();
-  $("#foot").innerHTML=`<a class="btn ghost fb" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">${esc(L.fb)} ↗</a><span>${esc(L.foot)}</span><span class="updated">${esc(L.updated)}</span>`;
+  $("#foot").innerHTML=`<div class="recbox"><h3>${esc(L.recH)}</h3><p>${esc(L.recP)}</p><a class="btn primary" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">${esc(L.recB)} ↗</a></div><a class="btn ghost fb" href="https://ig.me/m/markethub.tw" target="_blank" rel="noopener">${esc(L.fb)} ↗</a><span>${esc(L.foot)}</span><span class="updated">${esc(L.updated)}</span><span><a href="https://${GH_USER}.github.io/${GH_REPO}/privacy.html" target="_blank" rel="noopener">${lang==="zh"?"隱私權政策":"Privacy"}</a>・<a href="https://${GH_USER}.github.io/${GH_REPO}/support.html" target="_blank" rel="noopener">${lang==="zh"?"協助":"Support"}</a></span>`;
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("button,a"); if(!b) return;
@@ -1263,6 +1286,8 @@ document.addEventListener("click",e=>{
   if(b.dataset.ics){ saveIcs(MARKETS.find(x=>x.id===b.dataset.ics)); return; }
   if(b.dataset.notify){ notifyMe(MARKETS.find(x=>x.id===b.dataset.notify)); return; }
   if(b.dataset.expof){ expoF=b.dataset.expof; renderExpos(); return; }
+  if(b.dataset.share){ shareItem(b.dataset.share); return; }
+  if(b.dataset.expoexp){ const id=b.dataset.expoexp; expoOpen.has(id)?expoOpen.delete(id):expoOpen.add(id); renderExpos(); return; }
   if(b.dataset.day){ calDay=b.dataset.day; renderCalendar(); return; }
   if(b.id==="cal-fav"){ calFav=!calFav; renderCalendar(); return; }
   if(b.id==="cal-prev"||b.id==="cal-next"){ const ms=calMonths(); const i=ms.indexOf(calMonth)+(b.id==="cal-next"?1:-1); if(ms[i]){calMonth=ms[i]; renderCalendar();} return; }
@@ -1278,8 +1303,27 @@ document.addEventListener("change",e=>{
   const r=e.target.dataset&&e.target.dataset.r; if(r) updateRemind(MARKETS.find(x=>x.id===r));
 });
 const h0=(location.hash||"").slice(1); if(["list","progress","calendar","expos","organizers","guide"].includes(h0)) view=h0;
-renderGloss(); render();
+let sharedDone=false;
+function openShared(){
+  if(sharedDone) return; const h=decodeURIComponent((location.hash||"").slice(1)); const mm=h.match(/^(m|e)=(.+)$/); if(!mm) return;
+  const id=mm[2];
+  if(mm[1]==="m"&&MARKETS.some(x=>x.id===id)){ view="list"; Object.assign(F,{q:"",region:"all",cat:"all",status:"all",month:"all"}); F.quick.clear(); expanded.add(id); }
+  else if(mm[1]==="e"&&EXPOS.some(x=>x.id===id)){ view="expos"; expoF="all"; expoOpen.add(id); }
+  else return;
+  sharedDone=true; render();
+  setTimeout(()=>{ const el=document.querySelector(`[data-card="${id}"],[data-expo="${id}"]`); if(el) el.scrollIntoView({block:"center"}); },60);
+}
+window.addEventListener("hashchange",()=>{ sharedDone=false; openShared(); });
+try{ const cd=store.get("mh-data",null); if(cd) applyData(cd); }catch(_){}
+renderGloss(); render(); openShared();
 
+function applyData(d){
+  if(!d||!Array.isArray(d.MARKETS)||!d.MARKETS.length) return false;
+  if(d.updated&&d.updated<UPDATED) return false;
+  [[MARKETS,d.MARKETS],[EXPOS,d.EXPOS],[ORGS,d.ORGS]].forEach(([a,b])=>{ if(Array.isArray(b)&&b.length){ a.length=0; a.push(...b); } });
+  if(d.updated){ UPDATED=d.updated; T.zh.updated=`資料更新：${d.updated}`; T.en.updated=`Updated ${d.updated}`; }
+  return true;
+}
 (async function loadRemote(){
   let url=null;
   try{ if(/github\.io$/.test(location.hostname)) url="data.json"; else if(GH_USER!=="USERNAME") url=`https://${GH_USER}.github.io/${GH_REPO}/data.json`; }catch(_){}
@@ -1288,11 +1332,7 @@ renderGloss(); render();
     const ctl=new AbortController(); const tm=setTimeout(()=>ctl.abort(),5000);
     const r=await fetch(url+"?t="+Date.now(),{signal:ctl.signal,cache:"no-store"}); clearTimeout(tm);
     if(!r.ok) return; const d=await r.json();
-    if(!d||!Array.isArray(d.MARKETS)||!d.MARKETS.length) return;
-    if(d.updated&&d.updated<UPDATED) return;
-    [[MARKETS,d.MARKETS],[EXPOS,d.EXPOS],[ORGS,d.ORGS]].forEach(([a,b])=>{ if(Array.isArray(b)&&b.length){ a.length=0; a.push(...b); } });
-    if(d.updated){ UPDATED=d.updated; T.zh.updated=`資料更新：${d.updated}`; T.en.updated=`Updated ${d.updated}`; }
-    render();
+    if(applyData(d)){ store.set("mh-data",d); render(); openShared(); }
   }catch(_){}
 })();
 </script>
